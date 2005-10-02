@@ -21,6 +21,7 @@ module Text
           c.htmllines("#{t}\t<dt>#{$1}</dt>")
           c.htmllines("#{t}\t<dd>#{$2}</dd>")
         end
+        c.htmllines("#{t}</dl>")
       end
     end
   end
