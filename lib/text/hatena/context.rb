@@ -7,11 +7,13 @@ module Text
         @permalink = args[:permalink]
         @invalidnode = args[:invalidnode]
         @sectionanchor = args[:sectionanchor]
+        @texthandler = args[:texthandler]
         @htmllines = []
         @html = ""
         @footnotes = []
         @sectioncount = 0
         @syntaxrefs = []
+        @noparagraph = 0
         init
       end
 
@@ -65,6 +67,11 @@ module Text
         @syntaxpattern
       end
 
+      def noparagraph(args = nil)
+        @noparagraph = args unless args.nil?
+        @noparagraph
+      end
+
       def sectioncount
         @sectioncount
       end
@@ -87,6 +94,10 @@ module Text
 
       def sectionanchor
         @sectionanchor
+      end
+
+      def texthandler 
+        @texthandler
       end
     end
   end

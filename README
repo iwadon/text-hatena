@@ -1,0 +1,6 @@
+
+lib/text/hatena/utils/htmlsplit.rb は 
+MoonWolf さん作成の htmlsplit ライブラリに HORIKAWA さん作成のパッチを適用したものです。著作権はそれぞれの作者となります。
+
+- htmlsplit (http://www.moonwolf.com/ruby/)
+- htmlsplit patch (http://www.nslabs.jp/htmlsplit.rhtml)

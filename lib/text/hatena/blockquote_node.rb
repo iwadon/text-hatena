@@ -6,7 +6,7 @@ module Text
       def init
         @pattern = /^>>$/
         @endpattern = /^<<$/
-        @childnode = %w(h4 h5 blockquote dl list pre superpre table)
+        @childnode = %w(h4 h5 blockquote dl list pre superpre table tagline tag)
         @startstring = "<blockquote>"
         @endstring = "</blockquote>"
       end

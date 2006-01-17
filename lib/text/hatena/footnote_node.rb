@@ -9,19 +9,24 @@ module Text
         return if c.footnotes.empty?
         t = "\t" * @ilevel
         p = c.permalink
+        @html = ""
 
-        c.htmllines(%Q!#{t}<div class="footnote">!)
+        @html << %Q!#{t}<div class="footnote">\n!
         i = 0
         text = Text.new({:context => @context})
         c.footnotes.each do |note|
           i += 1
           text.parse(note)
-          l = %Q!#{t}<p class="footnote"><a href="#{p}#fn#{i}" name="f#{i}">*#{i}</a>: ! +
+          l = %Q!#{t}\t<p class="footnote"><a href="#{p}#fn#{i}" name="f#{i}">*#{i}</a>: ! +
             text.html +
             "</p>"
-          c.htmllines(l)
+          @html << "#{l}\n"
         end
-        c.htmllines("#{t}</div>")
+        @html << %Q!#{t}</div>\n!
+      end
+
+      def html
+        @html
       end
     end
   end

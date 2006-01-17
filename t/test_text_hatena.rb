@@ -16,218 +16,290 @@ class Test_Text_Hatena < Test::Unit::TestCase
   def test_all
     assert_instance_of(Text::Hatena, @p)
 
-    a = ["title", "body"]
-    text = h3text(*a)
-    @p.parse(text)
-    html = @p.html
-    assert_match(/<h3>/, html)
-    assert_match(/<div class="section">/, html)
-    assert_match(/#{@perma}/, html)
-    assert_match(%r!<span class="sanchor">#{@sa}</span>!, html)
-    assert_match(/#{a[0]}/, html)
-    assert_match(%r!<p>#{a[1]}</p>!, html)
-
-    a = [1234567890]
-    text = h3timetext(*a)
-    @p.parse(text)
-    html = @p.html
-    assert_match(/\##{a[0]}/, html)
-    assert_match(/name="#{a[0]}"/, html)
-    assert_match(%r!<span class="timestamp">08:31</span>!, html)
-
-    a = ["hobby"]
-    text = h3cattext(*a)
-    @p.parse(text)
-    html = @p.html
-    assert_match(/\##{a[0]}/, html)
-    assert_match(/name="#{a[0]}"/, html)
-    assert_match(%r!\[<a[^>]+>#{a[0]}</a>\]!i, html)
-
-    a = ["h4title"]
-    text = h4text(*a)
-    @p.parse(text)
-    html = @p.html
-    assert_match(%r!<h4>#{a[0]}</h4>!, html)
-
-    a = ["h5title"]
-    text = h5text(*a)
-    @p.parse(text)
-    html = @p.html
-    assert_match(%r!<h5>#{a[0]}</h5>!, html)
-
-    a = ["quoted"]
-    text = blockquotetext(*a)
-    @p.parse(text)
-    html = @p.html
-    assert_match(/<blockquote>/, html)
-    assert_match(%r!<p>#{a[0]}</p>!, html)
-
-    a = ["cinnamon", "dog"]
-    text = dltext(*a)
-    @p.parse(text)
-    html = @p.html
-    assert_match(/<dl>/, html)
-    assert_match(%r!<dt>#{a[0]}</dt>!, html)
-    assert_match(%r!<dd>#{a[1]}</dd>!, html)
-
-    a = ["komono", "kyoto", "shibuya"]
-    text = ultext(*a)
-    @p.parse(text)
-    html = @p.html
-    assert_match(/<ul>/, html)
-    assert_match(%r!<li>#{a[0]}</li>!, html)
-    assert_match(%r!<li>#{a[1]}</li>!, html)
-    assert_match(%r!<li>#{a[2]}</li>!, html)
-
-    text = ultext2(*a)
-    @p.parse(text)
-    html = @p.html
-    assert_match(/<ul>.+<ul>.+<ul>/m, html)
-    assert_match(%r!<li>#{a[0]}</li>!, html)
-    assert_match(%r!<li>#{a[1]}</li>!, html)
-    assert_match(%r!<li>#{a[2]}</li>!, html)
-
-    text = oltext(*a)
-    @p.parse(text)
-    html = @p.html
-    assert_match(/<ol>/, html)
-    assert_match(%r!<li>#{a[0]}</li>!, html)
-    assert_match(%r!<li>#{a[1]}</li>!, html)
-    assert_match(%r!<li>#{a[2]}</li>!, html)
-
-    a = ["#!/usr/bin/perl"]
-    text = pretext(*a)
-    @p.parse(text)
-    html = @p.html
-    assert_match(/<pre>/, html)
-    assert_match(%r!#{a[0]}!, html)
-
-    text = superpretext(*a)
-    @p.parse(text)
-    html = @p.html
-    assert_match(/<pre>/, html)
-    assert_match(%r!#{a[0]}!, html)
-
-    a = ["Lang", "Module", "Perl", "Text::Hatena"]
-    text = tabletext(*a)
-    @p.parse(text)
-    html = @p.html
-    assert_match(%r!<table>.+</table>!m, html)
-    assert_match(%r!<tr>.+</tr>.+<tr>.+</tr>!m, html)
-    assert_match(%r!<th>#{a[0]}</th>!, html)
-    assert_match(%r!<th>#{a[1]}</th>!, html)
-    assert_match(%r!<td>#{a[2]}</td>!, html)
-    assert_match(%r!<td>#{a[3]}</td>!, html)
-
-    a = ["GNU", "GNU Is Not Unix", "is not unix"]
-    text = footnotetext(*a)
-    @p.parse(text)
-    html = @p.html
-    assert_match(%r!#{a[0]}<span class="footnote"><a.+?>\*1</a></span>#{a[2]}!, html)
-    assert_match(%r!<p class="footnote"><a.+?>\*1</a>.+#{a[1]}</p>!m, html)
-  end
-
-  def h3text(title, body)
-    <<END
-*#{title}
-#{body}
+    # h3
+    text = <<END
+*title
+body
 END
-  end
+    html2 = <<END
+<div class="section">
+\t<h3><a name="p1" href="http://d.hatena.ne.jp/jkondo/20050906#p1"><span class="sanchor">sa</span></a> title</h3>
+\t<p>body</p>
+</div>
+END
+    @p.parse(text)
+    html = @p.html
+    html2.chomp!
+    assert_equal(html2, html)
 
-  def h3timetext(time)
-    <<END
-*#{time}*record time
+    # h3time
+    text = <<END
+*1234567890*record time
 remember time.
 END
-  end
+    html2 = <<END
+<div class="section">
+\t<h3><a name="1234567890" href="http://d.hatena.ne.jp/jkondo/20050906#1234567890"><span class="sanchor">sa</span></a> record time</h3> <span class="timestamp">08:31</span>
+\t<p>remember time.</p>
+</div>
+END
+    @p.parse(text)
+    html = @p.html
+    html2.chomp!
+    assert_equal(html2, html)
 
-  def h3cattext(cat)
-    <<END
-*#{cat}*[#{cat}]my hobby
+
+    # h3cat
+    text = <<END
+*hobby*[hobby]my hobby
 I like this.
 END
-  end
+    html2 = <<END
+<div class="section">
+\t<h3><a name="hobby" href="http://d.hatena.ne.jp/jkondo/20050906#hobby"><span class="sanchor">sa</span></a> [<a href="http://d.hatena.ne.jp/jkondo/?word=hobby" class="sectioncategory">hobby</a>]my hobby</h3>
+\t<p>I like this.</p>
+</div>
+END
+    @p.parse(text)
+    html = @p.html
+    html2.chomp!
+    assert_equal(html2, html)
 
-  def h4text(title)
-    <<END
-**#{title}
+
+    # h4
+    text = <<END;
+**h4title
 
 h4body
 END
-  end
-
-  def h5text(title)
-    <<END
-***#{title}
-
-h4body
+    html2 = <<END
+<div class="section">
+\t<h4>h4title</h4>
+\t
+\t<p>h4body</p>
+</div>
 END
-  end
+    @p.parse(text)
+    html = @p.html
+    html2.chomp!
+    assert_equal(html2, html)
 
-  def blockquotetext(str)
-    <<END
+    # h5
+    text = <<END
+***h5title
+
+h5body
+END
+    html2 = <<END
+<div class="section">
+\t<h5>h5title</h5>
+\t
+\t<p>h5body</p>
+</div>
+END
+    @p.parse(text)
+    html = @p.html
+    html2.chomp!
+    assert_equal(html2, html)
+
+    # blockquote
+    text = <<END
 >>
-#{str}
+quoted
 <<
 END
-  end
-
-  def dltext(term, desc)
-    <<END
-:#{term}:#{desc}
+    html2 = <<END
+<div class="section">
+\t<blockquote>
+\t\t<p>quoted</p>
+\t</blockquote>
+</div>
 END
-  end
+    @p.parse(text)
+    html = @p.html
+    html2.chomp!
+    assert_equal(html2, html)
 
-  def ultext(a, b, c)
-    <<END
--#{a}
--#{b}
--#{c}
+    # dl
+    text = <<END
+:cinnamon:dog
 END
-  end
-
-  def ultext2(a, b, c)
-    <<END
--#{a}
---#{b}
----#{c}
+    html2 = <<END
+<div class="section">
+\t<dl>
+\t\t<dt>cinnamon</dt>
+\t\t<dd>dog</dd>
+\t</dl>
+</div>
 END
-  end
+    @p.parse(text)
+    html = @p.html
+    html2.chomp!
+    assert_equal(html2, html)
 
-  def oltext(a, b, c)
-    <<END
-+#{a}
-+#{b}
-+#{c}
+    # ul
+    text = <<END
+-komono
+--kyoto
+---shibuya
+--hachiyama
 END
-  end
+    html2 = <<END
+<div class="section">
+\t<ul>
+\t\t<li>komono
+\t\t<ul>
+\t\t\t<li>kyoto
+\t\t\t<ul>
+\t\t\t\t<li>shibuya</li>
+\t\t\t</ul>
+\t\t\t</li>
+\t\t\t<li>hachiyama</li>
+\t\t</ul>
+\t\t</li>
+\t</ul>
+</div>
+END
+    @p.parse(text)
+    html = @p.html
+    html2.chomp!
+    assert_equal(html2, html)
 
-  def pretext(str)
-    <<END
+
+    # ol
+    text = <<END
++komono
++kyoto
++shibuya
+END
+    html2 = <<END
+<div class="section">
+\t<ol>
+\t\t<li>komono</li>
+\t\t<li>kyoto</li>
+\t\t<li>shibuya</li>
+\t</ol>
+</div>
+END
+    @p.parse(text)
+    html = @p.html
+    html2.chomp!
+    assert_equal(html2, html)
+
+    # pre
+    text = <<END
 >|
-#{str}
+#!/usr/bin/perl
 |<
 END
-  end
+    html2 = <<END
+<div class="section">
+\t<pre>
+#!/usr/bin/perl
+</pre>
+</div>
+END
+    @p.parse(text)
+    html = @p.html
+    html2.chomp!
+    assert_equal(html2, html)
 
-  def superpretext(str)
-    <<END
+    # superpre
+    text = <<END
 >||
-#{str}
+html starts with <html>.
 ||<
 END
-  end
-
-  def tabletext(a, b, c, d)
-    <<END
-|*#{a}|*#{b}|
-|#{c}|#{d}|
+    html2 = <<END
+<div class="section">
+\t<pre>
+html starts with &lt;html&gt;.
+</pre>
+</div>
 END
-  end
+    @p.parse(text)
+    html = @p.html
+    html2.chomp!
+    assert_equal(html2, html)
 
-  def footnotetext(a, b, c)
-    <<END
-#{a}((#{b}))#{c}
+    # table
+    text = <<END
+|*Lang|*Module|
+|Perl|Text::Hatena|
 END
+    html2 = <<END
+<div class="section">
+\t<table>
+\t\t<tr>
+\t\t\t<th>Lang</th>
+\t\t\t<th>Module</th>
+\t\t</tr>
+\t\t<tr>
+\t\t\t<td>Perl</td>
+\t\t\t<td>Text::Hatena</td>
+\t\t</tr>
+\t</table>
+</div>
+END
+    @p.parse(text)
+    html = @p.html
+    html2.chomp!
+    assert_equal(html2, html)
+
+    # tagline
+    text = <<END
+><div>no paragraph line</div><
+paragraph line
+END
+    html2 = <<END
+<div class="section">
+\t<div>no paragraph line</div>
+\t<p>paragraph line</p>
+</div>
+END
+    @p.parse(text)
+    html = @p.html
+    html2.chop!
+    assert_equal(html2, html)
+
+    # tag
+    text = <<END
+><blockquote>
+no paragraph
+lines
+</blockquote><
+paragraph
+lines
+END
+    html2 = <<END
+<div class="section">
+\t<blockquote>
+\t\tno paragraph
+\t\tlines
+\t</blockquote>
+\t<p>paragraph</p>
+\t<p>lines</p>
+</div>
+END
+    @p.parse(text)
+    html = @p.html
+    html2.chomp!
+    assert_equal(html2, html)
+
+    # footnote
+    text = <<END
+GNU((GNU Is Not Unix)) is not unix.
+END
+    html2 = <<END
+<div class="section">
+\t<p>GNU<span class="footnote"><a name="fn1" href="http://d.hatena.ne.jp/jkondo/20050906#f1" title="GNU Is Not Unix">*1</a></span> is not unix.</p>
+</div>
+<div class="footnote">
+\t<p class="footnote"><a href="http://d.hatena.ne.jp/jkondo/20050906#fn1" name="f1">*1</a>: GNU Is Not Unix</p>
+</div>
+END
+     @p.parse(text)
+     html = @p.html
+     assert_equal(html2, html)
   end
 end

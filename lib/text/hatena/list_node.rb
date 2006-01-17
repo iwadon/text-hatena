@@ -16,22 +16,40 @@ module Text
         @type = $1[-1, 1] == "-" ? "ul" : "ol"
 
         c.htmllines("#{t}<#{@type}>")
+        @open = 0
         while l = c.nextline
           break unless @pattern =~ l
           if $1.size > @llevel
-            c.htmllines("#{t}\t<li>")
+            #c.htmllines("#{t}\t<li>")
             node = self.class.new({ :context => @context,
                                     :ilevel => @ilevel })
             node.parse
-            c.htmllines("#{t}\t</li>")
+            #c.htmllines("#{t}\t</li>")
           elsif $1.size < @llevel
             break
           else
-            l = c.shiftline
-            c.htmllines("#{t}\t<li>#{$2}</li>")
+            #l = c.shiftline
+            #c.htmllines("#{t}\t<li>#{$2}</li>")
+            _closeitem unless @open.zero?
+            c.shiftline
+            nl = c.nextline
+            content = $2
+            if nl =~ @pattern && $1.size > @llevel
+              c.htmllines("#{t}\t<li>#{content}")
+              @open += 1
+            else
+              c.htmllines("#{t}\t<li>#{content}</li>")
+            end
           end
         end
+        _closeitem unless @open.zero?
         c.htmllines("#{t}</#{@type}>")
+      end
+
+      def _closeitem
+        t = "\t" * (@ilevel + @llevel -1)
+        @context.htmllines("#{t}\t</li>")
+        @open = 0
       end
     end
   end

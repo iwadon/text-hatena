@@ -5,7 +5,7 @@ module Text
     class PreNode < Node
       def init
         @pattern = /^>\|$/
-        @endpattern = /^\|<$/
+        @endpattern = /\|<$/
         @startstring = "<pre>"
         @endstring = "</pre>"
       end
@@ -16,15 +16,21 @@ module Text
         c.shiftline
         t = "\t" * @ilevel
         c.htmllines(t + @startstring)
+        x = ""
         while c.hasnext
           l = c.nextline
           if @endpattern =~ l
+            x = $` || ""
             c.shiftline
             break
           end
-          c.htmllines(c.shiftline)
+          c.htmllines(escape_pre(c.shiftline))
         end
-        c.htmllines(@endstring)
+        c.htmllines("#{x}#{@endstring}")
+      end
+
+      def escape_pre(arg)
+        arg
       end
     end
   end
