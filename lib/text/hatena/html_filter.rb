@@ -69,7 +69,7 @@ module Text
           unless attr.nil?
             attr.each do |p, v|
               if p =~ @allallowattr
-              elsif @allowattr[tagname.to_sym] || p =~ /^#{@allowattr[tagname.to_sym]}$/i 
+              elsif @allowattr[tagname.to_sym] && /^#{@allowattr[tagname.to_sym]}$/i =~ p
               else
                 next
               end
@@ -104,7 +104,7 @@ module Text
           @html << "<#{tagname}"
           attr.each do |p, v|
             if p =~ @allallowattr
-            elsif @allowattr[tagname.to_sym] || p =~ /^#{@allowattr[tagname.to_sym]}$/i 
+            elsif @allowattr[tagname.to_sym] && /^#{@allowattr[tagname.to_sym]}$/i =~ p
             else
               next
             end
