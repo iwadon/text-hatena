@@ -102,14 +102,16 @@ module Text
       def emptyelemtaghandler(tagname, attr, text)
         if tagname =~ @allowtag
           @html << "<#{tagname}"
-          attr.each do |p, v|
-            if p =~ @allallowattr
-            elsif @allowattr[tagname.to_sym] && /^#{@allowattr[tagname.to_sym]}$/i =~ p
-            else
-              next
+          unless attr.nil?
+            attr.each do |p, v|
+              if p =~ @allallowattr
+              elsif @allowattr[tagname.to_sym] && /^#{@allowattr[tagname.to_sym]}$/i =~ p
+              else
+                next
+              end
+              v = sanitize(v)
+              @html << %Q| #{p}="#{v}"|
             end
-            v = sanitize(v)
-            @html << %Q| #{p}="#{v}"|
           end
           @html << " />"
         else
