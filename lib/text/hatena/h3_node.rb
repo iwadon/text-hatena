@@ -22,11 +22,12 @@ module Text
           cat.gsub!(/\[([^\:\[\]]+)\]/e) do
             w = $1
             ew = _encode($1)
-            %Q![<a class="sectioncategory" href="#{b}?word=#{ew}">#{w}</a>]!
+            %Q![<a href="#{b}?word=#{ew}" class="sectioncategory">#{w}</a>]!
           end
         end
-        extra = ""
         name, extra = _formatname(name)
+        name ||= ""
+        cat ||= ""
         c.htmllines(%Q!#{t}<h3><a href="#{p}##{name}" name="#{name}"><span class="sanchor">#{sa}</span></a> #{cat}#{title}</h3>#{extra}!)
       end
 
