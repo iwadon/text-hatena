@@ -65,6 +65,45 @@ o['selected']=true    #&lt;option selected&gt;
 require "cgi"
 require "kconv"
 
+=begin OrderedHash
+<h2><a href="OrderedHash">OrderedHash</a></h2>
+<p>順番を保存するハッシュ</p>
+<p>このクラスは<URL:http://rubyist.g.hatena.ne.jp/secondlife/20060519/1148046815>の実装を基にしています。</p>
+=end
+class OrderedHash
+  def initialize
+    @keys = []
+    @values = []
+  end
+  attr_accessor :keys, :values
+
+  def []=(key, value)
+    if index = keys.index(key)
+      values[index] = value
+    else
+      keys << key
+      values << value
+    end
+  end
+
+  def [](key)
+    values[@keys.index(key)]
+  end
+
+  def clear
+    @keys.clear
+    @values.clear
+    self
+  end
+
+  def replace(other)
+    clear
+    other.each do |k, v|
+      self[k] = v
+    end
+  end
+end
+
 =begin EmptyElementTag
  
 <h2><a name="EmptyElementTag">EmptyElementTag</a></h2>
@@ -99,7 +138,7 @@ class EmptyElementTag
 	attr_accessor :attr
 	def to_s
 		if @attr
-			"<"+@name+@attr.keys.sort.collect{|n|
+			"<"+@name+@attr.keys.collect{|n|
 				v = @attr[n]
 				if v==true
 					' ' + n
@@ -118,7 +157,7 @@ class EmptyElementTag
 		if attr
 			attr[key]=value
 		else
-			attr = value and {key=>value}
+			attr = value and OrderedHash.new.replace({key=>value})
 		end
 	end
 end
@@ -155,7 +194,7 @@ class StartTag
 	end
 	def to_s
 		if @attr
-			"<"+@name+@attr.keys.sort.collect{|n|
+			"<"+@name+@attr.keys.collect{|n|
 				v = @attr[n]
 				if v==true
 					' ' + n
@@ -174,7 +213,7 @@ class StartTag
 		if attr
 			attr[key]=value
 		else
-			attr = value and {key=>value}
+			attr = value and OrderedHash.new.replace({key=>value})
 		end
 	end
 end
@@ -442,7 +481,7 @@ class HTMLSplit
 		@document = []	#パースしたHTMLのリスト
 		name = ''
 		text = ''
-		attr = {}
+		attr = OrderedHash.new
 		attrname = ''
 		state = :TEXT
 		#
@@ -455,7 +494,7 @@ class HTMLSplit
 						@document << CharacterData.new(text)
 					end
 					name = ''
-					attr={}
+					attr = OrderedHash.new
 					state = :TAGNAME
 				else
 					text << char
@@ -504,7 +543,7 @@ class HTMLSplit
         when '<'  # 閉じない開始タグ
           make_tag(name, attr)
           name = ''
-          attr = {}
+          attr = OrderedHash.new
           state = :TAGNAME
 				when /\s/
 				else
