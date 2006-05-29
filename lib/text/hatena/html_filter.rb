@@ -6,6 +6,9 @@ module Text
       def initialize(args = {})
         @context = args[:context]
         @html =  "" 
+        @in_paragraph = false
+        @in_anchor = false
+        @in_superpre = false
         init
       end
 
@@ -64,6 +67,17 @@ module Text
       end
 
       def starthandler(tagname, attr, text)
+        attr ||= {}
+        if tagname == "p"
+          @in_paragraph = true
+        elsif tagname == "a"
+          @in_anchor = true
+        elsif tagname == "pre" and attr["class"] == "hatena-super-pre"
+          @in_superpre = true
+        end
+        @html << text
+
+=begin          
         if tagname =~ @allowtag
           @html << "<#{tagname}"
           unless attr.nil?
@@ -85,6 +99,7 @@ module Text
         else
           @html << sanitize(text)
         end
+=end
       end
 
       def endhandler(tagname, text)
@@ -120,7 +135,7 @@ module Text
       end
 
       def sanitize(str)
-        return if str.empty?
+        return str if str.empty?
         str.gsub!(/&(?![\#a-zA-Z0-9_]{2,6};)/, "&amp;")
         str.gsub!(/\</, "\&lt\;")
         str.gsub!(/\>/, "\&gt\;")
@@ -147,6 +162,18 @@ module Text
 
       def html
         @html
+      end
+
+      def in_paragraph
+        @in_paragraph
+      end
+
+      def in_anchor
+        @in_anchor
+      end
+
+      def in_superpre
+        @in_superpre
       end
     end
   end
