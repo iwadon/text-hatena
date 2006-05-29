@@ -6,7 +6,7 @@ module Text
       def init
         @pattern = /^>\|\|$/
         @endpattern = /^\|\|<$/
-        @startstring = "<pre>"
+        @startstring = '<pre class="hatena-super-pre">'
         @endstring = "</pre>"
       end
 
