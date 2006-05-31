@@ -29,7 +29,7 @@ module Text
         end
 
         def html_encode(text)
-          return nil if str.nil? or str.empty?
+          return nil if text.nil? or text.empty?
           text.gsub(/(\W)/) do
             sprintf("%%%02x", $1[0])
           end
