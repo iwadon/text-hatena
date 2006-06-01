@@ -1,5 +1,7 @@
 # -*- mode: ruby; coding: utf-8 -*-
 
+$:.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
+
 require "test/unit"
 require "text/hatena/auto_link"
 
@@ -96,6 +98,20 @@ class Test_Text_Hatena_AutoLink < Test::Unit::TestCase
     end
 
     html2 = 'This is our site. <div class="hatena-http-detail"><p class="hatena-http-detail-url"><a href="http://www.hatena.ne.jp/" target="_blank">http://www.hatena.ne.jp/</a></p><p class="hatena-http-detail-title">はてな</p></div>'
+    assert_equal(html2, html)
+  end
+
+  # 04_autolink_ftp.t
+  def test_04
+    t = Text::Hatena::AutoLink::FTP.new
+    pat = t.pattern
+
+    text = 'This is our files. ftp://www.hatena.ne.jp/'
+    html = text.gsub(/(#{pat})/) do
+      t.parse($1)
+    end
+
+    html2 = 'This is our files. <a href="ftp://www.hatena.ne.jp/">ftp://www.hatena.ne.jp/</a>'
     assert_equal(html2, html)
   end
 
