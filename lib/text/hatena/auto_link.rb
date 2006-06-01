@@ -18,7 +18,9 @@ module Text
         "idea" => "text/hatena/auto_link/hatena_idea",
         "isbn" => "text/hatena/auto_link/asin",
         "ean" => "text/hatena/auto_link/ean",
-        "ftp" => "text/hatena/auto_link/ftp",
+=end
+        "ftp" => "Text::Hatena::AutoLink::FTP",
+=begin
         "jan" => "text/hatena/auto_link/ean",
         "map" => "text/hatena/auto_link/hatena_map",
         "tex" => "text/hatena/auto_link/tex",
