@@ -67,9 +67,14 @@ module Text
         @syntaxpattern
       end
 
-      def noparagraph(args = nil)
-        @noparagraph = args unless args.nil?
+      def noparagraph(*args)
+        @noparagraph = args[0] unless args.empty?
         @noparagraph
+      end
+
+      def autolink(*args)
+        @autolink = args[0] unless args.empty?
+        @autolink
       end
 
       def sectioncount
