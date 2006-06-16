@@ -15,17 +15,16 @@ module Text
         def parse(text, opt = {})
           case text
           when @@pattern_useful
-            _parse_useful(text, opt)
+            return _parse_useful(text, opt)
           when @@pattern_simple
-            _parse_simple(text)
-          else
-            # ???
+            return _parse_simple(text)
           end
         end
 
         def _parse_simple(url)
+          return nil if url.nil? or url.empty?
           url.sub!(/^\[/, '')
-          url.sub!(/\[$/, '')
+          url.sub!(/\]$/, '')
           sprintf('<a href="%s"%s>%s</a>', url, @a_target_string, url)
         end
 
