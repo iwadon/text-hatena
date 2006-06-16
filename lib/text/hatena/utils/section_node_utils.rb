@@ -32,7 +32,7 @@ module Text
         }
         if l.empty?
           return BrNode.new(nodeoption)
-        elsif @context.noparagraph != 0
+        elsif @context.noparagraph
           return CDataNode.new(nodeoption)
         else
           return PNode.new(nodeoption)
