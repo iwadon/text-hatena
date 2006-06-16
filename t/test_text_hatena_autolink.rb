@@ -160,15 +160,15 @@ END
 
     html2 = <<END
 <div class="section">
-	<h3><a href="http://d.hatena.ne.jp/jkondo/20050906#p1" name="p1"><span class="sanchor">sa</spam></a> Hi</h3>
+	<h3><a href="http://d.hatena.ne.jp/jkondo/20050906#p1" name="p1"><span class="sanchor">sa</span></a> Hi</h3>
 	<p>This is my blog.</p>
-	<p><a href="http://d.hatena.ne.jp/jkondo">http://d.hatena.ne.jp/jkondo/</a></p>
+	<p><a href="http://d.hatena.ne.jp/jkondo/">http://d.hatena.ne.jp/jkondo/</a></p>
 </div>
 END
 
     p.parse(text)
     html = p.html
-    html.chomp!
+    html2.chomp!
 
     assert_equal(html2, html)
   end
