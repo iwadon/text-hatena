@@ -11,7 +11,7 @@ module Text
     class SectionNode < Node
       include SectionNodeUtils
       def init
-        @childnode = %w(h5 h4 h3 blockquote dl list pre superpre table tagline tag)
+        @childnode = %w(h5 h4 h3 blockquote dl list superpre pre table tagline tag)
         @startstring = %Q!<div class="section">!
         @endstring = %Q!</div>!
         @started = false
@@ -65,7 +65,7 @@ module Text
         }
         if l.empty?
           return BrNode.new(nodeoption)
-        elsif @context.noparagraph != 0
+        elsif @context.noparagraph
           return CDataNode.new(nodeoption)
         else
           return PNode.new(nodeoption)
