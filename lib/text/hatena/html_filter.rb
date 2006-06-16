@@ -14,6 +14,7 @@ module Text
 
       def init
         @parser = HTMLSplit
+=begin
         @allowtag = /^(a|abbr|acronym|address|b|base|basefont|big|blockquote|br|col|em|caption|center|cite|code|div|dd|del|dfn|dl|dt|fieldset|font|form|hatena|h\d|hr|i|img|input|ins|kbd|label|legend|li|meta|ol|optgroup|option|p|pre|q|rb|rp|rt|ruby|s|samp|select|small|span|strike|strong|sub|sup|table|tbody|td|textarea|tfoot|th|thead|tr|tt|u|ul|var)$/
         @allallowattr = /^(accesskey|align|alt|background|bgcolor|border|cite|class|color|datetime|height|id|size|title|type|valign|width)$/
         @allowattr = {
@@ -40,6 +41,7 @@ module Text
           :th => 'rowspan|colspan|nowrap',
           :textarea => 'name|cols|rows',
         }
+=end
       end
 
       def parse(html)
@@ -47,22 +49,22 @@ module Text
         scanner.document.each do |tag|
           text = tag.to_s
           case tag
-            when StartTag
-              starthandler(tag.name, tag.attr, text)
-            when EmptyElementTag
-              emptyelemtaghandler(tag.name, tag.attr, text)
-            when EndTag
-              endhandler(tag.name, text)
-            when CharacterData
-              texthandler(text)
-            when Comment
-              commenthandler(text)
+          when StartTag
+            starthandler(tag.name, tag.attr, text)
+          when EmptyElementTag
+            emptyelemtaghandler(tag.name, tag.attr, text)
+          when EndTag
+            endhandler(tag.name, text)
+          when CharacterData
+            texthandler(text)
+          when Comment
+            commenthandler(text)
           end
         end
       end
 
       def texthandler(text)
-        @context.texthandler.call(text, @context)
+        text = @context.texthandler.call(text, @context, self)
         @html << text
       end
 
@@ -76,38 +78,17 @@ module Text
           @in_superpre = true
         end
         @html << text
-
-=begin          
-        if tagname =~ @allowtag
-          @html << "<#{tagname}"
-          unless attr.nil?
-            attr.each do |p, v|
-              if p =~ @allallowattr
-              elsif @allowattr[tagname.to_sym] && /^#{@allowattr[tagname.to_sym]}$/i =~ p
-              else
-                next
-              end
-              if p =~ /^(src|href|cite)$/i
-                 v = sanitize_url(v)
-              else 
-                v = sanitize(v)
-              end
-              @html << %Q| #{p}="#{v}"|
-            end
-          end
-          @html << ">"
-        else
-          @html << sanitize(text)
-        end
-=end
       end
 
       def endhandler(tagname, text)
-        if tagname =~ @allowtag
-          @html << "</#{tagname}>"
-        else
-          @html << sanitize(text)
+        if tagname == 'p'
+          @in_paragraph = false
+        elsif tagname == 'a'
+          @in_anchor = false
+        elsif tagname == 'pre' and @in_superpre
+          @in_superpre = false
         end
+        @html << text
       end
 
       def commenthandler(text)
@@ -115,6 +96,8 @@ module Text
       end
 
       def emptyelemtaghandler(tagname, attr, text)
+        @html << text
+=begin
         if tagname =~ @allowtag
           @html << "<#{tagname}"
           unless attr.nil?
@@ -132,8 +115,10 @@ module Text
         else
           @html << sanitize(text)
         end
+=end
       end
 
+=begin
       def sanitize(str)
         return str if str.empty?
         str.gsub!(/&(?![\#a-zA-Z0-9_]{2,6};)/, "&amp;")
@@ -159,6 +144,7 @@ module Text
         url.gsub!(/["'\(\)<>]/, "")
         return url
       end
+=end
 
       def html
         @html
