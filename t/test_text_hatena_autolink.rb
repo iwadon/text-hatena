@@ -127,4 +127,49 @@ class Test_Text_Hatena_AutoLink < Test::Unit::TestCase
     html2 = 'I don\'t want to link id:jkondo.'
     assert_equal(html2, html)
   end
+
+  # 99_autolink.t
+  def test_99
+    t = Text::Hatena::AutoLink.new
+
+    text = 'Here is my album. f:id:sample'
+    html = t.parse(text)
+    html2 = 'Here is my album. <a href="http://f.hatena.ne.jp/sample/">f:id:sample</a>'
+    assert_equal(html2, html)
+
+    text = 'Hatena news. [google:news:はてな]'
+    html = t.parse(text)
+    html2 = 'Hatena news. <a href="http://news.google.com/news?q=%e3%81%af%e3%81%a6%e3%81%aa&ie=utf-8&oe=utf-8">google:news:はてな</a>'
+    assert_equal(html2, html)
+
+    base = 'http://d.hatena.ne.jp/jkondo'
+    parma = 'http://d.hatena.ne.jp/jkondo/20050906'
+    sa = 'sa'
+
+    p = Text::Hatena.new(:baseuri => base,
+                         :permalink => parma,
+                         :ilevel => 0,
+                         :ivalidnode => [],
+                         :sectionanchor => sa)
+
+    text = <<END
+*Hi
+This is my blog.
+http://d.hatena.ne.jp/jkondo/
+END
+
+    html2 = <<END
+<div class="section">
+	<h3><a href="http://d.hatena.ne.jp/jkondo/20050906#p1" name="p1"><span class="sanchor">sa</spam></a> Hi</h3>
+	<p>This is my blog.</p>
+	<p><a href="http://d.hatena.ne.jp/jkondo">http://d.hatena.ne.jp/jkondo/</a></p>
+</div>
+END
+
+    p.parse(text)
+    html = p.html
+    html.chomp!
+
+    assert_equal(html2, html)
+  end
 end
