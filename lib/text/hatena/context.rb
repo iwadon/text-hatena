@@ -13,7 +13,7 @@ module Text
         @footnotes = []
         @sectioncount = 0
         @syntaxrefs = []
-        @noparagraph = 0
+        @noparagraph = false
         init
       end
 
