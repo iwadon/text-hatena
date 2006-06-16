@@ -28,7 +28,7 @@ module Text
         name, extra = _formatname(name)
         name ||= ""
         cat ||= ""
-        c.htmllines(%Q!#{t}<h3><a href="#{p}##{name}" name="#{name}"><span class="sanchor">#{sa}</span></a> #{cat}#{title}</h3>#{extra}!)
+        c.htmllines(%Q!#{t}<h3><a href="#{p}\##{name}" name="#{name}"><span class="sanchor">#{sa}</span></a> #{cat}#{title}</h3>#{extra}!)
       end
 
       def _formatname(name)
