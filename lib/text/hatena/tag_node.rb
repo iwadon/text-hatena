@@ -16,7 +16,7 @@ module Text
         t = "\t" * @ilevel
         return unless c.nextline =~ /#{@pattern}/
         c.shiftline
-        c.noparagraph(1)
+        c.noparagraph(true)
         _set_child_node_refs
         x = _parse_text($1)
         c.htmllines(t + x)
@@ -31,7 +31,7 @@ module Text
           node = _findnode(l)
           node.parse if node
         end
-        c.noparagraph(0)
+        c.noparagraph(false)
       end
 
       def _parse_text(l)
