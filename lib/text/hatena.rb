@@ -4,7 +4,7 @@ require "text/hatena/html_filter"
 
 module Text
   class Hatena
-    VERSION = "0.06"
+    VERSION = "0.12"
 
     def initialize(args = {})
       @html = ""
@@ -13,20 +13,24 @@ module Text
       @ilevel = Integer(args[:ilevel]) || 0 # level of default indent
       @invalidnode = args[:invalidnode] || []
       @sectionanchor = args[:sectionanchor] || "o-"
-      @texthandler = args[:texthandler] || Proc.new{|text, c|
-        text.gsub!(/\(\((.+?)\)\)/eo) do
-          note, pre, post = $1, $`, $'
-          if pre == ")" and post == "("
-            "((#{note}))"
-          else
-            notes = c.footnotes(note)
-            num = notes.size
-            note.gsub!(/<.*?>/, "")
-            note.gsub!(/&/, "&amp;")
-            %Q!<span class="footnote"><a href="#{p}#f#{num}" title="#{note}" name="fn#{num}">*#{num}</a></span>!
+      @texthandler = args[:texthandler] || Proc.new do |text, c, hp|
+        if hp.in_anchor or hp.in_superpre
+          text
+        else
+          p = c.permalink
+          unless al = c.autolink
+            # cache instance
+            require "text/hatena/auto_link"
+            a = AutoLink.new(args[:autolink_option])
+            c.autolink(a)
+            al = a
           end
+          text = al.parse(text, {
+                            :in_paragraph => hp.in_paragraph
+                          })
+          text
         end
-      }
+      end
     end
 
     def parse(text)
