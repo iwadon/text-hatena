@@ -6,7 +6,9 @@ module Text
 =begin
         "question" => "text/hatena/auto_link/hatena_question",
         "amazon" => "text/hatena/auto_link/hatena_question",
-        "google" => "text/hatena/auto_link/google",
+=end
+        "google" => "Text::Hatena::AutoLink::Google",
+=begin
         "mailto" => "text/hatena/auto_link/mailto",
         "search" => "text/hatena/auto_link/hatena_search",
         "graph" => "text/hatena/auto_link/hatena_graph",
@@ -28,7 +30,9 @@ module Text
         "a" => "text/hatena/auto_link/hatena_antenna",
         "b" => "text/hatena/auto_link/hatena_bookmark",
         "d" => "text/hatena/auto_link/hatena_diary",
-        "f" => "text/hatena/auto_link/hatena_fotolife",
+=end
+        "f" => "Text::Hatena::AutoLink::HatenaFotolife",
+=begin
         "g" => "text/hatena/auto_link/hatena_group",
         "i" => "text/hatena/auto_link/hatena_idea",
         "q" => "text/hatena/auto_link/hatena_question",
@@ -37,7 +41,8 @@ module Text
         "]" => "Text::Hatena::AutoLink::Unbracket",
       }
 
-      def initialize(args = {})
+      def initialize(args = nil)
+        args ||= {}
         @a_target = args[:a_target]
         @scheme_option = args[:scheme_option] || {}
         @invalid_scheme = args[:invalid_scheme] || []
@@ -77,7 +82,7 @@ module Text
           end
         end
         text.gsub(@pattern) do
-          text = $1
+          text = $&
           parser = nil
           schemes.each do |sc|
             if /^\w+$/ =~ sc and /^\[?#{sc}:/i =~ text
