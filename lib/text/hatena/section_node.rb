@@ -10,6 +10,7 @@ module Text
   class Hatena
     class SectionNode < Node
       include SectionNodeUtils
+
       def init
         @childnode = %w(h5 h4 h3 blockquote dl list superpre pre table tagline tag)
         @startstring = %Q!<div class="section">!
@@ -32,44 +33,6 @@ module Text
           node.parse
         end
         c.htmllines(t + @endstring)
-      end
-
-      def _set_child_node_refs
-        c = @context
-        nodeoption = {
-          :context => c,
-          :ilevel => @ilevel + 1,
-        }
-        invalid = {}
-        c.invalidnode.each do |node|
-          invalid[node] = {}
-        end
-        @childnode.each do |node|
-          next if invalid.key?(node)
-          require "text/hatena/" + node.downcase + "_node"
-          mod = ::Text::Hatena.const_get(node.capitalize + "Node")
-          (@child_node_refs ||= []).push(mod.new(nodeoption))
-        end
-      end
-
-      def _findnode(l)
-        @child_node_refs.each do |node|
-          next unless pat = node.pattern
-          if pat =~ l
-            return node
-          end
-        end
-        nodeoption = {
-          :context => @context,
-          :ilevel => @ilevel + 1,
-        }
-        if l.empty?
-          return BrNode.new(nodeoption)
-        elsif @context.noparagraph
-          return CDataNode.new(nodeoption)
-        else
-          return PNode.new(nodeoption)
-        end
       end
     end
   end
