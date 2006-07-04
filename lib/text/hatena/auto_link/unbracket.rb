@@ -10,7 +10,7 @@ module Text
           [@@pattern]
         end
 
-        def parse(text)
+        def parse(text, opt = {})
           if @@pattern =~ text
             $1
           else
