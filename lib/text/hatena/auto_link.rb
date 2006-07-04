@@ -13,8 +13,8 @@ module Text
         "search" => "text/hatena/auto_link/hatena_search",
         "graph" => "text/hatena/auto_link/hatena_graph",
         "https" => "text/hatena/auto_link/http",
-        "asin" => "text/hatena/auto_link/asin",
 =end
+        "asin" => "Text::Hatena::AutoLink::ASIN",
         "http" => "Text::Hatena::AutoLink::HTTP",
 =begin
         "idea" => "text/hatena/auto_link/hatena_idea",
