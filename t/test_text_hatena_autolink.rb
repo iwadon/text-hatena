@@ -171,5 +171,62 @@ END
     html2.chomp!
 
     assert_equal(html2, html)
+
+    text = <<END
+*Hi
+This is our site. [http://www.hatena.ne.jp/:detail] Prese visit.
+><blockquote>
+[http://www.hatena.ne.jp/:detail]
+</blockquote><
+END
+
+    html2 = <<END
+<div class="section">
+	<h3><a href="http://d.hatena.ne.jp/jkondo/20050906#p1" name="p1"><span class="sanchor">sa</span></a> Hi</h3>
+	<p>This is our site. </p><div class="hatena-http-detail"><p class="hatena-http-detail-url"><a href="http://www.hatena.ne.jp/">http://www.hatena.ne.jp/</a></p><p class="hatena-http-detail-title">はてな</p></div><p> Please visit.</p>
+	<blockquote>
+		<div class="hatena-http-detail"><p class="hatena-http-detail-url"><a href="http://www.hatena.ne.jp/">http://www.hatena.ne.jp/</a></p><p class="hatena-http-detail-title">はてな</p></div>
+	</blockquote>
+</div>
+END
+
+    p.parse(text)
+    html = p.html
+    html2.chomp!
+
+    assert(html2, html)
+
+    text = <<END
+*Introducing my book.
+Here is my book.
+[asin:4798110523:image]
+END
+    html2 = <<END
+<div class="section">
+	<h3><a href="http://d.hatena.ne.jp/jkondo/20050906#p1" name="p1"><span class="sanchor">sa</span></a> Introducing my book.</h3>
+	<p>Here is my book.</p>
+	<p><a href="http://d.hatena.ne.jp/asin/4798110523"><img src="http://images-jp.amazon.com/images/P/4798110523.09.MZZZZZZZ.jpg" alt="「へんな会社」のつくり方" title="「へんな会社」のつくり方" class="asin"></a></p>
+</div>
+END
+
+    p.parse(text)
+    html = p.html
+    html2.chomp!
+    assert_equal(html2, html)
+
+    text = <<END
+Hello, []id:jkondo[].
+END
+
+    html2 = <<END
+<div class="section">
+	<p>Hello, id:jkondo.</p>
+</div>
+END
+
+    p.parse(text)
+    html = p.html
+    html2.chomp!
+    assert_equal(html2, html)
   end
 end
