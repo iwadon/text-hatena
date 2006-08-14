@@ -26,7 +26,9 @@ module Text
         "jan" => "text/hatena/auto_link/ean",
         "map" => "text/hatena/auto_link/hatena_map",
         "tex" => "text/hatena/auto_link/tex",
-        "id" => "text/hatena/auto_link/hatena_id",
+=end
+        "id" => "Text::Hatena::AutoLink::HatenaID",
+=begin
         "a" => "text/hatena/auto_link/hatena_antenna",
         "b" => "text/hatena/auto_link/hatena_bookmark",
         "d" => "text/hatena/auto_link/hatena_diary",
