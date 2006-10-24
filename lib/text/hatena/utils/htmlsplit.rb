@@ -1,3 +1,4 @@
+class HTMLSplit
 =begin Start of Document
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
@@ -381,7 +382,6 @@ HTML読み書き
       対応する要素がなかった時にはnilを返します。<br>
 </dl>
 =end
-class HTMLSplit
 	EMPTY = %w(area base basefont bgsound br col frame hr img input isindex 
 	           keygen link meta nextid param spacer wbr)
 

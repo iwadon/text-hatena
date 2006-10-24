@@ -44,15 +44,15 @@ module Text
         scanner.document.each do |tag|
           text = tag.to_s
           case tag
-            when StartTag
+            when HTMLSplit::StartTag
               starthandler(tag.name, tag.attr, text)
-            when EmptyElementTag
+            when HTMLSplit::EmptyElementTag
               emptyelemtaghandler(tag.name, tag.attr, text)
-            when EndTag
+            when HTMLSplit::EndTag
               endhandler(tag.name, text)
-            when CharacterData
+            when HTMLSplit::CharacterData
               texthandler(text)
-            when Comment
+            when HTMLSplit::Comment
               commenthandler(text)
           end
         end
