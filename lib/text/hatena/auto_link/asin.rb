@@ -1,3 +1,4 @@
+require "erb"
 require "open-uri"
 require "amazon/search"
 require "text/hatena/auto_link/scheme"
@@ -17,9 +18,13 @@ module Text
   <div class="hatena-asin-detail-info">
   <p class="hatena-asin-detail-title"><a href="<%= h(asin_url) %>"><%= h(title) %></a></p>
   <ul>
-    <% if prop.artists %><li><span class="hatena-asin-detail-label">アーティスト:</span><% prop.artists.each do |artist| %><a href="<%= h(keyword_url) %><%= h(artist) %>" class="keyword"><%= h(artist) %></a><% end %></li><% end %>
-    <% if prop.authors %><li><span class="hatena-asin-detail-label">作者:</span><% prop.authors.each do |author| %><a href="<%= h(keyword_url) %><%= h(author) %>" class="keyword"><%= h(author) %></a><% end %></li><% end %>
-    <% if prop.publisher %><li><span class="hatena-asin-detail-label">出版社/メーカー:</span><a href="<%= h(keyword_url) %><%= h(prop.publisher) %>" class="keyword"><%= h(prop.publisher) %></a></li><% end %>
+    <% if prop.artists %><li><span class="hatena-asin-detail-label">アーティスト:</span><% prop.artists.each do |artist| %><a href="<%= h(@keyword_url) %><%= h(artist) %>" class="keyword"><%= h(artist) %></a><% end %></li><% end %>
+    <% if prop.authors %><li><span class="hatena-asin-detail-label">作者:</span><% prop.authors.each do |author| %><a href="<%= h(@keyword_url) %><%= h(author) %>" class="keyword"><%= h(author) %></a><% end %></li><% end %>
+    <% if prop.manufacturer %><li><span class="hatena-asin-detail-label">出版社/メーカー:</span>
+    <a href="<%= h(@keyword_url) %><%= h(prop.manufacturer) %>" class="keyword">
+      <%= h(prop.manufacturer) %>
+    </a>
+    </li><% end %>
     <% if prop.release_date %><li><span class="hatena-asin-detail-label">発売日:</span><%= h(prop.release_date) %></li><% end %>
     <li><span class="hatena-asin-detail-label">メディア:</span><%= h(prop.media) %></li>
   </ul>
