@@ -6,19 +6,22 @@ module Text
   class Hatena
     class AutoLink
       class ASIN < Scheme
+        include ERB::Util
+
         @@pattern_asin_title = /\[(isbn|asin):([\w\-]{10,16}):title=(.*?)\]/i
         @@pattern_asin = /\[?(isbn|asin):([\w\-]{10,16}):?(image|detail|title)?:?(small|large)?\]?/i
         @@detail_template = <<END
 <div class="hatena-asin-detail">
-  <a href="<% asin_url | uri %>"><img src="<% property.ImageUrlSmall || property.ImageUrlLarge || property.ImageUrlMedium | utf8off | uri %>" class="hatena-asin-detail-image" alt="<% title | utf8off | html %>" title="<% title | utf8off | html %>"></a>
+  <a href="<%= h(asin_url || url) %>">
+    <img src="<%= h(prop.image_url_small || prop.image_url_large || prop.image_url_medium) %>" class="hatena-asin-detail-image" alt="<%= h(title) %>" title="<%= h(title) %>"></a>
   <div class="hatena-asin-detail-info">
-  <p class="hatena-asin-detail-title"><a href="<% asin_url | uri %>"><% title | utf8off | html %></a></p>
+  <p class="hatena-asin-detail-title"><a href="<%= h(asin_url) %>"><%= h(title) %></a></p>
   <ul>
-    <% IF property.artists %><li><span class="hatena-asin-detail-label">¥¢¡¼¥Æ¥£¥¹¥È:</span> <% FOREACH artist = property.artists %><a href="<% keyword_url %><% artist | utf8off | enword %>" class="keyword"><% artist | utf8off | html %></a> <% END %></li><% END %>
-    <% IF property.authors %><li><span class="hatena-asin-detail-label">ºî¼Ô:</span> <% FOREACH author = property.authors %><a href="<% keyword_url %><% author | utf8off | enword %>" class="keyword"><% author | utf8off | html %></a> <% END %></li><% END %>
-    <% IF property.publisher %><li><span class="hatena-asin-detail-label">½ÐÈÇ¼Ò/¥á¡¼¥«¡¼:</span> <a href="<% keyword_url %><% property.publisher | utf8off | enword %>" class="keyword"><% property.publisher | utf8off | html %></a></li><% END %>
-    <% IF property.ReleaseDate %><li><span class="hatena-asin-detail-label">È¯ÇäÆü:</span> <% property.ReleaseDate | utf8off | html %></li><% END %>
-    <li><span class="hatena-asin-detail-label">¥á¥Ç¥£¥¢:</span> <% property.Media | utf8off | html %></li>
+    <% if prop.artists %><li><span class="hatena-asin-detail-label">ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ:</span><% prop.artists.each do |artist| %><a href="<%= h(keyword_url) %><%= h(artist) %>" class="keyword"><%= h(artist) %></a><% end %></li><% end %>
+    <% if prop.authors %><li><span class="hatena-asin-detail-label">ä½œè€…:</span><% prop.authors.each do |author| %><a href="<%= h(keyword_url) %><%= h(author) %>" class="keyword"><%= h(author) %></a><% end %></li><% end %>
+    <% if prop.publisher %><li><span class="hatena-asin-detail-label">å‡ºç‰ˆç¤¾/ãƒ¡ãƒ¼ã‚«ãƒ¼:</span><a href="<%= h(keyword_url) %><%= h(prop.publisher) %>" class="keyword"><%= h(prop.publisher) %></a></li><% end %>
+    <% if prop.release_date %><li><span class="hatena-asin-detail-label">ç™ºå£²æ—¥:</span><%= h(prop.release_date) %></li><% end %>
+    <li><span class="hatena-asin-detail-label">ãƒ¡ãƒ‡ã‚£ã‚¢:</span><%= h(prop.media) %></li>
   </ul>
 </div>
 <div class="hatena-asin-detail-foot"></div>
@@ -84,7 +87,6 @@ END
               return sprintf('<a href="%s"%s>%s:%s</a>', asin_url, @a_target_string, scheme, asincode)
             end
           when /^detail/i
-            STDERR.puts("detail")
             prop = get_property(asincode) or return
             title = prop.product_name || "#{scheme}:#{asincode}"
             html = ERB.new(@@detail_template).result(binding)
