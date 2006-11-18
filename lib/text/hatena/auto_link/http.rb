@@ -38,7 +38,7 @@ module Text
           when /^detail/i
             title ||= _get_page_title(url)
             html = sprintf('<div class="hatena-http-detail"><p class="hatena-http-detail-url"><a href="%s"%s>%s</a></p><p class="hatena-http-detail-title">%s</p></div>', url, @a_target_string, url, title)
-            html = "</p>#{html}</p>" if opt[:in_paragraph]
+            html = "</p>#{html}<p>" if opt[:in_paragraph]
             html
           when /^image/i
             if /\.(jpe?g|gif|png|bmp)$/i =~ url
