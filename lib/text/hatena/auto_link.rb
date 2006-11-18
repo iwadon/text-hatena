@@ -63,7 +63,7 @@ module Text
           next if invalid[scheme]
           p = SCHEMES[scheme]
           require underscore(p)
-          option = @scheme_option[scheme] || {}
+          option = @scheme_option[scheme.to_s] || @scheme_option[scheme.intern] || {}
           unless option.key?(:a_target)
             option[:a_target] = @a_target
           end
