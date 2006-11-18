@@ -10,7 +10,7 @@ module Text
           [@@pattern]
         end
 
-        def parse(url)
+        def parse(url, opt)
           sprintf('<a href="%s"%s>%s</a>', url, @a_target_string, url)
         end
       end
