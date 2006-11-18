@@ -25,7 +25,7 @@ module Text
                            name, name)
           else
             sprintf('<a href="/%s/"%s>%s</a>',
-                    name, @a_target_tring, content)
+                    name, @a_target_string, content)
           end
         end
       end
