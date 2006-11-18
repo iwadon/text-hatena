@@ -13,7 +13,7 @@ module Text
         "asin" => "Text::Hatena::AutoLink::ASIN",
         "http" => "Text::Hatena::AutoLink::HTTP",
         "idea" => "Text::Hatena::AutoLink::HatenaIdea",
-        "isbn" => "Text::hatena::AutoLink::ASIN",
+        "isbn" => "Text::Hatena::AutoLink::ASIN",
         "ean" => "Text::Hatena::AutoLink::EAN",
         "ftp" => "Text::Hatena::AutoLink::FTP",
         "jan" => "Text::Hatena::AutoLink::EAN",
