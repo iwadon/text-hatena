@@ -20,7 +20,7 @@ module Text
 #        "map" => "Text::Hatena::AutoLink::HatenaMap",
 #        "tex" => "Text::Hatena::AutoLink::Tex",
         "id" => "Text::Hatena::AutoLink::HatenaID",
-        "a" => "Text::Hatena::AutoLink::HatenaAntenna",
+#        "a" => "Text::Hatena::AutoLink::HatenaAntenna",
 #        "b" => "Text::Hatena::AutoLink::HatenaBookmark",
 #        "d" => "Text::Hatena::AutoLink::HatenaDiary",
         "f" => "Text::Hatena::AutoLink::HatenaFotolife",
