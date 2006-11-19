@@ -49,86 +49,154 @@ class TextHatenaAutoLinkTest < Test::Base
 end
 
 __END__
-=== 02_autolink_text.t
+=== 02_autolink_text.t 1
 --- in do_auto_link
 Hi, this is a simple text.
 --- out
 Hi, this is a simple text.
 
-=== 03_autolink_http.t
+=== 03_autolink_http.t 1
 --- in do_auto_link
 This is our site. http://www.hatena.ne.jp/
 --- out
 This is our site. <a href="http://www.hatena.ne.jp/">http://www.hatena.ne.jp/</a>
 
-=== 03_autolink_http.t
+=== 03_autolink_http.t 2
 --- in a_target_blank do_auto_link
 This is our site. http://www.hatena.ne.jp/
 --- out
 This is our site. <a href="http://www.hatena.ne.jp/" target="_blank">http://www.hatena.ne.jp/</a>
 
-=== 03_autolink_http.t
+=== 03_autolink_http.t 3
 --- in do_auto_link
 [http://www.hatena.ne.jp/images/top/h1.gif:image]
 --- out
 <a href="http://www.hatena.ne.jp/images/top/h1.gif"><img src="http://www.hatena.ne.jp/images/top/h1.gif" alt="http://www.hatena.ne.jp/images/top/h1.gif" class="hatena-http-image"></a>
 
-=== 03_autolink_http.t
+=== 03_autolink_http.t 4
 --- in a_target_blank do_auto_link
 [http://www.hatena.ne.jp/images/top/h1.gif:image:w150]
 --- out
 <a href="http://www.hatena.ne.jp/images/top/h1.gif" target="_blank"><img src="http://www.hatena.ne.jp/images/top/h1.gif" alt="http://www.hatena.ne.jp/images/top/h1.gif" class="hatena-http-image" width="150"></a>
 
-=== 03_autolink_http.t
+=== 03_autolink_http.t 5
 --- in a_target_blank do_auto_link
 [http://www.hatena.ne.jp/mobile/:barcode]
 --- out
 <a href="http://www.hatena.ne.jp/mobile/" target="_blank"><img src="http://d.hatena.ne.jp/barcode?str=http%3a%2f%2fwww%2ehatena%2ene%2ejp%2fmobile%2f" class="barcode" alt="http://www.hatena.ne.jp/mobile/"></a>
 
-=== 03_autolink_http.t
+=== 03_autolink_http.t 6
 --- in a_target_blank do_auto_link
 This is our secure site. https://www.hatena.ne.jp/
 --- out
 This is our secure site. <a href="https://www.hatena.ne.jp/" target="_blank">https://www.hatena.ne.jp/</a>
 
-=== 03_autolink_http.t
+=== 03_autolink_http.t 7
+--- SKIP
 --- in a_target_blank do_auto_link
 This is our site. [http://www.hatena.ne.jp/:title=Hatena]
 --- out
 This is our site. <a href="http://www.hatena.ne.jp/" target="_blank">Hatena</a>
 
-=== 03_autolink_http.t
+=== 03_autolink_http.t 8
+--- SKIP
 --- in a_target_blank do_auto_link
 This is our site. [http://www.hatena.ne.jp/:title]
 --- out
 This is our site. <a href="http://www.hatena.ne.jp/" target="_blank">はてな</a>
 
-=== 03_autolink_http.t
+=== 03_autolink_http.t 9
+--- SKIP
 --- in a_target_blank do_auto_link
 This is our site. [http://www.hatena.ne.jp/:detail]
 --- out
 This is our site. <div class="hatena-http-detail"><p class="hatena-http-detail-url"><a href="http://www.hatena.ne.jp/" target="_blank">http://www.hatena.ne.jp/</a></p><p class="hatena-http-detail-title">はてな</p></div>
 
-=== 04_autolink_ftp.t
+=== 04_autolink_ftp.t 1
 --- in do_auto_link
 This is our files. ftp://www.hatena.ne.jp/
 --- out
 This is our files. <a href="ftp://www.hatena.ne.jp/">ftp://www.hatena.ne.jp/</a>
 
-=== 05_autolink_mailto.t
---- SKIP
---- in do_autolink
+=== 05_autolink_mailto.t 1
+--- in do_auto_link
 send me a mail mailto:info@example.com
 --- out
 send me a mail <a href="mailto:info@example.com">mailto:info@example.com</a>
 
-=== 12_autolink_unblacket.t
+=== 06_autolink_hatenafotolife.t 1
+--- in do_auto_link
+Here is my album. f:id:sample
+--- out
+Here is my album. <a href="http://f.hatena.ne.jp/sample/">f:id:sample</a>
+
+=== 06_autolink_hatenafotolife.t 2
+--- in a_target_blank do_auto_link
+Here is my favorite. f:id:sample:favorite
+--- out
+Here is my favorite. <a href="http://f.hatena.ne.jp/sample/favorite" target="_blank">f:id:sample:favorite</a>
+
+=== 06_autolink_hatenafotolife.t 3
+--- in a_target_blank do_auto_link
+Yukidaruma. f:id:jkondo:20060121153528j:image
+--- out
+Yukidaruma. <a href="http://f.hatena.ne.jp/jkondo/20060121153528" target="_blank"><img src="http://f.hatena.ne.jp/images/fotolife/j/jkondo/20060121/20060121153528.jpg" alt="f:id:jkondo:20060121153528j:image" title="f:id:jkondo:20060121153528j:image"></a>
+
+=== 06_autolink_hatenafotolife.t 4
+--- in a_target_blank do_auto_link
+Sky photos. [f:t:空]
+--- out
+Sky photos. <a href="http://f.hatena.ne.jp/t/%e7%a9%ba" target="_blank">f:t:空</a>
+
+=== 06_autolink_hatenafotolife.t 5
+--- in a_target_blank do_auto_link
+Cinnamon photos. [f:keyword:しなもん]
+--- out
+Cinnamon photos. <a href="http://f.hatena.ne.jp/keyword/%e3%81%97%e3%81%aa%e3%82%82%e3%82%93" target="_blank">f:keyword:しなもん</a>
+
+=== 07_autolink_hatenagroup.t 1
+--- in a_target_blank do_auto_link
+This is my archive. g:hatena:id:sample:archive
+--- out
+This is my archive. <a href="http://hatena.g.hatena.ne.jp/sample/archive">g:hatena:id:sample:archive</a>
+
+=== 07_autolink_hatenagroup.t 2
+--- in a_target_blank do_auto_link
+This is my archive. g:hatena:id:sample:archive:200601
+--- out
+This is my archive. <a href="http://hatena.g.hatena.ne.jp/sample/archive/200601">g:hatena:id:sample:archive:200601</a>
+
+=== 07_autolink_hatenagroup.t 3
+--- in a_target_blank do_auto_link
+This is my gdiary. g:hatena:id:sample
+--- out
+This is my gdiary. <a href="http://hatena.g.hatena.ne.jp/sample/">g:hatena:id:sample</a>
+
+=== 07_autolink_hatenagroup.t 4
+--- in a_target_blank do_auto_link
+This is my article. g:hatena:id:sample:20060121:1137814960
+--- out
+This is my article. <a href="http://hatena.g.hatena.ne.jp/sample/20060121/1137814960">g:hatena:id:sample:20060121:1137814960</a>
+
+=== 07_autolink_hatenagroup.t 5
+--- in a_target_blank do_auto_link
+see [g:hatena:keyword:はてな情報削除関連事例]
+--- out
+see <a class="okeyword" href="http://hatena.g.hatena.ne.jp/keyword/%e3%81%af%e3%81%a6%e3%81%aa%e6%83%85%e5%a0%b1%e5%89%8a%e9%99%a4%e9%96%a2%e9%80%a3%e4%ba%8b%e4%be%8b">g:hatena:keyword:はてな情報削除関連事例</a>
+
+=== 07_autolink_hatenagroup.t 6
+--- in a_target_blank do_auto_link
+g:texthatena:bbs:1:1
+--- out
+<a href="http://texthatena.g.hatena.ne.jp/bbs/1/1">g:texthatena:bbs:1:1</a>
+
+=== 12_autolink_unblacket.t 1
 --- in do_auto_link
 I don\'t want to link []id:jkondo[].
 --- out
 I don\'t want to link id:jkondo.
 
-=== 99_autolink.t
+=== 99_autolink.t 1
 --- in do_auto_link
 Here is my album. f:id:sample
 --- out
@@ -153,6 +221,7 @@ http://d.hatena.ne.jp/jkondo/
 </div>
 
 === 99_autolink.t
+--- SKIP
 --- in hatenaize
 *Hi
 This is our site. [http://www.hatena.ne.jp/:detail] Please visit.
@@ -169,6 +238,7 @@ This is our site. [http://www.hatena.ne.jp/:detail] Please visit.
 </div>
 
 === 99_autolink.t
+--- SKIP
 --- in hatenaize
 *Introducing my book.
 Here is my book.
@@ -181,6 +251,7 @@ Here is my book.
 </div>
 
 === 99_autolink.t
+--- SKIP
 --- in hatenaize
 *Introducing my book.
 Here is my book.
