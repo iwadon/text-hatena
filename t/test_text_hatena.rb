@@ -1,9 +1,5 @@
 require "t/test_helper"
 
-class Test::Base
-  PASSTHROUGH_EXCEPTIONS = []
-end
-
 class TextHatenaTest < Test::Base
   filters %w(.strip)
   filters :in => "hatenaize"
