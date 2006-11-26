@@ -75,21 +75,24 @@ module Text
         private
 
         def _get_page_title(url)
-          open(url) do |f|
-            content = f.read(131072) # 2^17
-            return unless /<title.*?>(.*?)<\/title>/i =~ content
-            title = $1
-            if h = @option[:title_handler]
-              if /charset="?(.+?)"?$/i =~ f.content_type
-                cset = $1.downcase
-              elsif /<meta[^>]+charset="?([\w\d\s\-]+)"?/i =~ content
-                cset = $1.downcase
+          begin
+            open(url) do |f|
+              content = f.read(131072) # 2^17
+              return unless /<title.*?>(.*?)<\/title>/i =~ content
+              title = $1
+              if h = @option[:title_handler]
+                if /charset="?(.+?)"?$/i =~ f.content_type
+                  cset = $1.downcase
+                elsif /<meta[^>]+charset="?([\w\d\s\-]+)"?/i =~ content
+                  cset = $1.downcase
+                end
+                title = h.call(title, cset)
               end
-              title = h.call(title, cset)
+              return title
             end
-            return title
+          rescue => e
+            return e.message
           end
-          nil
         end
       end
     end
