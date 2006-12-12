@@ -226,6 +226,12 @@ I don\'t want to link id:jkondo.
 --- out
 <a href="http://search.hatena.ne.jp/keyword?word=%e3%81%af%e3%81%a6%e3%81%aa&ie=utf8" target="_blank">search:はてな</a>
 
+=== 23_autolink_amazon.t 1
+--- in a_target_blank do_auto_link
+Hatena books. [amazon:はてな]
+--- out
+Hatena books. <a href="http://www.amazon.co.jp/exec/obidos/external-search?mode=blended&tag=hatena-22&encoding-string-jp=%e6%97%a5%e6%9c%ac%e8%aa%9e&keyword=%e3%81%af%e3%81%a6%e3%81%aa" target="_blank">amazon:はてな</a>
+
 === 24_autolink_rakuten.t 1
 --- in a_target_blank do_auto_link
 Hatena goods. [rakuten:はてな]

@@ -4,7 +4,7 @@ module Text
       VERSION = "0.06"
       SCHEMES = {
 #        "question" => "Text::Hatena::AutoLink::HatenaQuestion",
-#        "amazon" => "Text::Hatena::AutoLink::HatenaQuestion",
+        "amazon" => "Text::Hatena::AutoLink::Amazon",
         "rakuten" => "Text::Hatena::AutoLink::Rakuten",
         "google" => "Text::Hatena::AutoLink::Google",
         "mailto" => "Text::Hatena::AutoLink::Mailto",
