@@ -196,6 +196,36 @@ I don\'t want to link []id:jkondo[].
 --- out
 I don\'t want to link id:jkondo.
 
+=== 22_autolink_hatenasearch.t 1
+--- in a_target_blank do_auto_link
+[search:question:はてな]
+--- out
+<a href="http://search.hatena.ne.jp/questsearch?word=%e3%81%af%e3%81%a6%e3%81%aa&ie=utf8" target="_blank">search:question:はてな</a>
+
+=== 22_autolink_hatenasearch.t 2
+--- in a_target_blank do_auto_link
+[search:asin:はてな]
+--- out
+<a href="http://search.hatena.ne.jp/asinsearch?word=%e3%81%af%e3%81%a6%e3%81%aa&ie=utf8" target="_blank">search:asin:はてな</a>
+
+=== 22_autolink_hatenasearch.t 3
+--- in a_target_blank do_auto_link
+[search:web:はてな]
+--- out
+<a href="http://search.hatena.ne.jp/websearch?word=%e3%81%af%e3%81%a6%e3%81%aa&ie=utf8" target="_blank">search:web:はてな</a>
+
+=== 22_autolink_hatenasearch.t 4
+--- in a_target_blank do_auto_link
+[search:keyword:はてな]
+--- out
+<a href="http://search.hatena.ne.jp/keyword?word=%e3%81%af%e3%81%a6%e3%81%aa&ie=utf8" target="_blank">search:keyword:はてな</a>
+
+=== 22_autolink_hatenasearch.t 5
+--- in a_target_blank do_auto_link
+[search:はてな]
+--- out
+<a href="http://search.hatena.ne.jp/keyword?word=%e3%81%af%e3%81%a6%e3%81%aa&ie=utf8" target="_blank">search:はてな</a>
+
 === 24_autolink_rakuten.t 1
 --- in a_target_blank do_auto_link
 Hatena goods. [rakuten:はてな]

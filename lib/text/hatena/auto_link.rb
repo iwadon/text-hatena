@@ -8,7 +8,7 @@ module Text
         "rakuten" => "Text::Hatena::AutoLink::Rakuten",
         "google" => "Text::Hatena::AutoLink::Google",
         "mailto" => "Text::Hatena::AutoLink::Mailto",
-#        "search" => "Text::Hatena::AutoLink::HatenaSearch",
+        "search" => "Text::Hatena::AutoLink::HatenaSearch",
 #        "graph" => "Text::Hatena::AutoLink::HatenaGraph",
         "https" => "Text::Hatena::AutoLink::HTTP",
         "asin" => "Text::Hatena::AutoLink::ASIN",
