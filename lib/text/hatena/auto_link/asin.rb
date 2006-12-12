@@ -114,7 +114,7 @@ END
         end
 
         def ua
-          Amazon::Search::Request.new(@amazon_token, @amazon_affiliate_id, @amazon_locale)
+          ::Amazon::Search::Request.new(@amazon_token, @amazon_affiliate_id, @amazon_locale)
         end
       end
     end
