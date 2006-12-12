@@ -9,7 +9,7 @@ task :default => :test
 
 Rake::RDocTask.new do |t|
   t.rdoc_dir = 'rdoc'
-  t.rdoc_files.include('README', 'lib/**/*.rb')
+  t.rdoc_files.include('README.en', 'lib/**/*.rb')
   t.options << '--charset' << 'utf-8'
   t.template = 'kilmer'
 end
@@ -37,6 +37,7 @@ spec = Gem::Specification.new do |s|
   s.summary = "A module for using Hatena text format"
   s.require_path = 'lib'
   s.files = Dir.glob('{lib,test}/**/*')
+  s.has_rdoc = true
 end
 Rake::GemPackageTask.new(spec) do |t|
   t.need_tar = true
