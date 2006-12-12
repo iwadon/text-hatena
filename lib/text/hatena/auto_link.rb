@@ -66,7 +66,7 @@ module Text
 
       def parse(text, opt = {})
         schemes = @parser.keys.sort do |a, b|
-          if b == "]"
+          if a == "]"
             1
           else
             b.size <=> a.size
