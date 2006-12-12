@@ -14,14 +14,12 @@ Rake::RDocTask.new do |t|
   t.template = 'kilmer'
 end
   
-
 Rake::TestTask.new do |t|
   t.pattern = "t/test*.rb"
 end
 
 begin
   require "rcov/rcovtask"
-
   Rcov::RcovTask.new do |t|
     t.libs << "."
     t.pattern = "t/test*.rb"
@@ -47,5 +45,5 @@ task :install => :package do
   sh %(sudo gem install pkg/#{PKG_NAME}-#{PKG_VERS})
 end
 task :uninstall do
-  sh %(sudo gem uninstall #{NAME})
+  sh %(sudo gem uninstall #{PKG_NAME})
 end
