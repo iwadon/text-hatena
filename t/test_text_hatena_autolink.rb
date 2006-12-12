@@ -46,6 +46,15 @@ class TextHatenaAutoLinkTest < Test::Base
     }
     value
   end
+
+  def affiliate_id(value)
+    @options[:scheme_option] = {
+      :isbn => {
+        :amazon_affiliate_id => 'staffdiaryrei-22',
+      }
+    }
+    value
+  end
 end
 
 __END__
@@ -189,6 +198,36 @@ see <a class="okeyword" href="http://hatena.g.hatena.ne.jp/keyword/%e3%81%af%e3%
 g:texthatena:bbs:1:1
 --- out
 <a href="http://texthatena.g.hatena.ne.jp/bbs/1/1">g:texthatena:bbs:1:1</a>
+
+=== 08_autolink_asin.t 1
+--- in a_target_blank do_auto_link
+Here is my book. ISBN:4798110523
+--- out
+Here is my book. <a href="http://d.hatena.ne.jp/asin/4798110523" target="_blank">ISBN:4798110523</a>
+
+=== 08_autolink_asin.t 2
+--- in a_target_blank do_auto_link
+Here is my book. ISBN:4798110523:image
+--- out
+Here is my book. <a href="http://d.hatena.ne.jp/asin/4798110523" target="_blank"><img src="http://images-jp.amazon.com/images/P/4798110523.09.MZZZZZZZ.jpg" alt="「へんな会社」のつくり方" title="「へんな会社」のつくり方" class="asin"></a>
+
+=== 08_autolink_asin.t 3
+--- in a_target_blank do_auto_link
+Here is my book. ISBN:4798110523:title
+--- out
+Here is my book. <a href="http://d.hatena.ne.jp/asin/4798110523" target="_blank">「へんな会社」のつくり方</a>
+
+=== 08_autolink_asin.t 4
+--- in a_target_blank do_auto_link
+Here is my book. [ISBN:4798110523:title=How to make a strange company.]
+--- out
+Here is my book. <a href="http://d.hatena.ne.jp/asin/4798110523" target="_blank">How to make a strange company.</a>
+
+=== 08_autolink_asin.t 5
+--- in affiliate_id do_auto_link
+Here is my book. ISBN:4798110523
+--- out
+Here is my book. <a href="http://d.hatena.ne.jp/asin/4798110523/staffdiaryrei-22">ISBN:4798110523</a>
 
 === 12_autolink_unblacket.t 1
 --- in do_auto_link
