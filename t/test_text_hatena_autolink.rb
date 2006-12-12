@@ -196,6 +196,12 @@ I don\'t want to link []id:jkondo[].
 --- out
 I don\'t want to link id:jkondo.
 
+=== 24_autolink_rakuten.t 1
+--- in a_target_blank do_auto_link
+Hatena goods. [rakuten:はてな]
+--- out
+Hatena goods. <a href="http://pt.afl.rakuten.co.jp/c/002e8f0a.89099887/?sv=2&v=3&p=0&sitem=%a4%cf%a4%c6%a4%ca" target="_blank">rakuten:はてな</a>
+
 === 99_autolink.t 1
 --- in do_auto_link
 Here is my album. f:id:sample
