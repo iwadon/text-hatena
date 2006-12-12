@@ -5,6 +5,7 @@ module Text
       SCHEMES = {
 #        "question" => "Text::Hatena::AutoLink::HatenaQuestion",
 #        "amazon" => "Text::Hatena::AutoLink::HatenaQuestion",
+        "rakuten" => "Text::Hatena::AutoLink::Rakuten",
         "google" => "Text::Hatena::AutoLink::Google",
         "mailto" => "Text::Hatena::AutoLink::Mailto",
 #        "search" => "Text::Hatena::AutoLink::HatenaSearch",
