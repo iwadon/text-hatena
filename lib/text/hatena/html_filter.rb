@@ -14,7 +14,7 @@ module Text
 
       def init
         @parser = HTMLSplit
-=begin
+#=begin
         @allowtag = /^(a|abbr|acronym|address|b|base|basefont|big|blockquote|br|col|em|caption|center|cite|code|div|dd|del|dfn|dl|dt|fieldset|font|form|hatena|h\d|hr|i|img|input|ins|kbd|label|legend|li|meta|ol|optgroup|option|p|pre|q|rb|rp|rt|ruby|s|samp|select|small|span|strike|strong|sub|sup|table|tbody|td|textarea|tfoot|th|thead|tr|tt|u|ul|var)$/
         @allallowattr = /^(accesskey|align|alt|background|bgcolor|border|cite|class|color|datetime|height|id|size|title|type|valign|width)$/
         @allowattr = {
@@ -41,7 +41,7 @@ module Text
           :th => 'rowspan|colspan|nowrap',
           :textarea => 'name|cols|rows',
         }
-=end
+#=end
       end
 
       def parse(html)
@@ -77,7 +77,28 @@ module Text
         elsif tagname == "pre" and attr["class"] == "hatena-super-pre"
           @in_superpre = true
         end
-        @html << text
+#        @html << text
+        if @allowtag =~ tagname
+          @html << "<#{tagname}"
+          unless attr.nil?
+            attr.each do |p, v|
+              if @allallowattr =~ p
+              elsif @allowattr[tagname.intern] || /^#{@allowattr[tagname.intern]}$/i =~ p
+              else
+                next
+              end
+              if /^(src|href|cite)$/i =~ p
+                v = sanitize_url(v)
+              else
+                v = sanitize(v)
+              end
+              @html << %Q| #{p}="#{v}"|
+            end
+          end
+          @html << ">"
+        else
+          @html << sanitize(text)
+        end
       end
 
       def endhandler(tagname, text)
@@ -88,7 +109,11 @@ module Text
         elsif tagname == 'pre' and @in_superpre
           @in_superpre = false
         end
-        @html << text
+        if @allowtag =~ tagname
+          @html << "</#{tagname}>"
+        else
+          @html << sanitize(text)
+        end
       end
 
       def commenthandler(text)
@@ -96,8 +121,8 @@ module Text
       end
 
       def emptyelemtaghandler(tagname, attr, text)
-        @html << text
-=begin
+#        @html << text
+#=begin
         if tagname =~ @allowtag
           @html << "<#{tagname}"
           unless attr.nil?
@@ -115,16 +140,16 @@ module Text
         else
           @html << sanitize(text)
         end
-=end
+#=end
       end
 
-=begin
+#=begin
       def sanitize(str)
         return str if str.empty?
         str.gsub!(/&(?![\#a-zA-Z0-9_]{2,6};)/, "&amp;")
         str.gsub!(/\</, "\&lt\;")
         str.gsub!(/\>/, "\&gt\;")
-        str.gsub!(/\"/, "&quot;")
+#        str.gsub!(/\"/, "&quot;")
         str.gsub!(/\'/, "&#39;/")
         str.gsub!(/\\/, "\&#92\;")
         return str
@@ -144,7 +169,7 @@ module Text
         url.gsub!(/["'\(\)<>]/, "")
         return url
       end
-=end
+#=end
 
       def html
         @html
