@@ -72,6 +72,8 @@ require "kconv"
 <p>このクラスは<URL:http://rubyist.g.hatena.ne.jp/secondlife/20060519/1148046815>の実装を基にしています。</p>
 =end
 class OrderedHash
+  include Enumerable
+
   def initialize
     @keys = []
     @values = []
@@ -89,6 +91,13 @@ class OrderedHash
 
   def [](key)
     values[@keys.index(key)]
+  end
+
+  def each
+    @keys.each do |key|
+      yield key, self[key]
+    end
+    self
   end
 
   def clear
