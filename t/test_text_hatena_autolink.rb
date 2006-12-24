@@ -235,6 +235,24 @@ I don\'t want to link []id:jkondo[].
 --- out
 I don\'t want to link id:jkondo.
 
+=== 21_autolink_google.t 1
+--- in a_target_blank do_auto_link
+Hatena news. [google:news:はてな]
+--- out
+Hatena news. <a href="http://news.google.com/news?q=%e3%81%af%e3%81%a6%e3%81%aa&ie=utf-8&oe=utf-8" target="_blank">google:news:はてな</a>
+
+=== 21_autolink_google.t 2
+--- in a_target_blank do_auto_link
+Hatena images. [google:images:はてな]
+--- out
+Hatena images. <a href="http://images.google.com/images?q=%e3%81%af%e3%81%a6%e3%81%aa&ie=utf-8&oe=utf-8" target="_blank">google:images:はてな</a>
+
+=== 21_autolink_google.t 3
+--- in a_target_blank do_auto_link
+Google search results. [google:Text::Hatena]
+--- out
+Google search results. <a href="http://www.google.com/search?q=Text%3a%3aHatena&ie=utf-8&oe=utf-8" target="_blank">google:Text::Hatena</a>
+
 === 22_autolink_hatenasearch.t 1
 --- in a_target_blank do_auto_link
 [search:question:はてな]
