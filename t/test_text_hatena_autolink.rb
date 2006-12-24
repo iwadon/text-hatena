@@ -235,6 +235,24 @@ I don\'t want to link []id:jkondo[].
 --- out
 I don\'t want to link id:jkondo.
 
+=== 20_autolink_hatenamap.t 1
+--- in a_target_blank do_auto_link
+Many cafes [map:t:cafe]
+--- out
+Many cafes <a href="http://map.hatena.ne.jp/t/cafe" target="_blank">map:t:cafe</a>
+
+=== 20_autolink_hatenamap.t 2
+--- in a_target_blank do_auto_link
+Here is our office. map:x139.6981y35.6515
+--- out
+Here is our office. <a href="http://map.hatena.ne.jp/?x=139.6981&y=35.6515&z=4" target="_blank">map:x139.6981y35.6515</a>
+
+=== 20_autolink_hatenamap.t 3
+--- in a_target_blank do_auto_link
+Shibuya sta. [map:渋谷駅]
+--- out
+Shibuya sta. <a href="http://map.hatena.ne.jp/?word=%e6%b8%8b%e8%b0%b7%e9%a7%85" target="_blank">map:渋谷駅</a>
+
 === 21_autolink_google.t 1
 --- in a_target_blank do_auto_link
 Hatena news. [google:news:はてな]
