@@ -12,7 +12,7 @@ module Text
         @html = text
         c = @context
         p = c.permalink
-        @html.gsub!(/\(\((.+?)\)\)/eo) do
+        @html.gsub!(/\(\((.+?)\)\)/) do
           note, pre, post = $1, $`, $'
           if pre == ")" and post == "("
             "((#{note}))"
