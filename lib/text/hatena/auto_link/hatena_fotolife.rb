@@ -16,8 +16,7 @@ module Text
           @domain = "f.hatena.ne.jp"
         end
 
-        def parse(text, opt)
-          return nil if text.nil? or text.empty?
+        def parse(text, opt = {})
           if @@pattern_foto =~ text
             _parse_foto(text)
           elsif @@pattern_keyword =~ text
@@ -28,7 +27,7 @@ module Text
         private
 
         def _parse_foto(text)
-          return nil unless @@pattern_foto =~ text
+          return if @@pattern_foto !~ text
           name, fid, ext, type, size = $1, $2 || "", $3 || "", $4 || "", $5 || ""
           if /^g$/i =~ ext
             ext = "gif"
@@ -82,7 +81,7 @@ module Text
         end
 
         def _parse_keyword(text)
-          return nil unless @@pattern_keyword =~ text
+          return if @@pattern_keyword !~ text
           title, type, word = $1, $2, $3 || ""
           return sprintf('<a href="http://%s/%s/%s"%s>%s</a>',
                          @domain, type, html_encode(word),
