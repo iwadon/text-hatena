@@ -38,3 +38,15 @@ Here is my favorite. <a href="http://f.hatena.ne.jp/sample/favorite" target="_bl
 Yukidaruma. f:id:jkondo:20060121153528j:image
 --- o
 Yukidaruma. <a href="http://f.hatena.ne.jp/jkondo/20060121153528" target="_blank"><img src="http://f.hatena.ne.jp/images/fotolife/j/jkondo/20060121/20060121153528.jpg" alt="f:id:jkondo:20060121153528j:image" title="f:id:jkondo:20060121153528j:image"></a>
+
+=== HatenaFotolife 4
+--- i hatenaize_blank
+Sky photos. [f:t:空]
+--- o
+Sky photos. <a href="http://f.hatena.ne.jp/t/%e7%a9%ba" target="_blank">f:t:空</a>
+
+=== HatenaFotolife 5
+--- i hatenaize_blank
+Cinnamon photos. [f:keyword:しなもん]
+--- o
+Cinnamon photos. <a href="http://f.hatena.ne.jp/keyword/%e3%81%97%e3%81%aa%e3%82%82%e3%82%93" target="_blank">f:keyword:しなもん</a>
