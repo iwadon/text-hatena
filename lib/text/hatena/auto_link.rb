@@ -3,7 +3,7 @@ module Text
     class AutoLink
       VERSION = "0.06"
       SCHEMES = {
-#        "question" => "Text::Hatena::AutoLink::HatenaQuestion",
+        "question" => "Text::Hatena::AutoLink::HatenaQuestion",
         "amazon" => "Text::Hatena::AutoLink::Amazon",
         "rakuten" => "Text::Hatena::AutoLink::Rakuten",
         "google" => "Text::Hatena::AutoLink::Google",
@@ -13,7 +13,7 @@ module Text
         "https" => "Text::Hatena::AutoLink::HTTP",
         "asin" => "Text::Hatena::AutoLink::ASIN",
         "http" => "Text::Hatena::AutoLink::HTTP",
-#        "idea" => "Text::Hatena::AutoLink::HatenaIdea",
+        "idea" => "Text::Hatena::AutoLink::HatenaIdea",
         "isbn" => "Text::Hatena::AutoLink::ASIN",
 #        "ean" => "Text::Hatena::AutoLink::EAN",
         "ftp" => "Text::Hatena::AutoLink::FTP",
@@ -26,8 +26,8 @@ module Text
 #        "d" => "Text::Hatena::AutoLink::HatenaDiary",
         "f" => "Text::Hatena::AutoLink::HatenaFotolife",
         "g" => "Text::Hatena::AutoLink::HatenaGroup",
-#        "i" => "Text::Hatena::AutoLink::HatenaIdea",
-#        "q" => "Text::Hatena::AutoLink::HatenaQuestion",
+        "i" => "Text::Hatena::AutoLink::HatenaIdea",
+        "q" => "Text::Hatena::AutoLink::HatenaQuestion",
 #        "r" => "Text::Hatena::AutoLink::HatenaRSS",
         "]" => "Text::Hatena::AutoLink::Unbracket",
       }
