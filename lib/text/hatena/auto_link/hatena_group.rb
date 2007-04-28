@@ -18,7 +18,7 @@ module Text
           @domain = 'g.hatena.ne.jp'
         end
 
-        def parse(text, opt)
+        def parse(text, opt = {})
           case text
           when @@pattern_group_archive
             return _parse_group_archive(text)
