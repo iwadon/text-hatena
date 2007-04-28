@@ -28,7 +28,7 @@ module Text
         "g" => "Text::Hatena::AutoLink::HatenaGroup",
         "i" => "Text::Hatena::AutoLink::HatenaIdea",
         "q" => "Text::Hatena::AutoLink::HatenaQuestion",
-#        "r" => "Text::Hatena::AutoLink::HatenaRSS",
+        "r" => "Text::Hatena::AutoLink::HatenaRSS",
         "]" => "Text::Hatena::AutoLink::Unbracket",
       }
 
