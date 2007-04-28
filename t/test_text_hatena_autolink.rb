@@ -133,36 +133,6 @@ send me a mail mailto:info@example.com
 --- out
 send me a mail <a href="mailto:info@example.com">mailto:info@example.com</a>
 
-=== 06_autolink_hatenafotolife.t 1
---- in do_auto_link
-Here is my album. f:id:sample
---- out
-Here is my album. <a href="http://f.hatena.ne.jp/sample/">f:id:sample</a>
-
-=== 06_autolink_hatenafotolife.t 2
---- in a_target_blank do_auto_link
-Here is my favorite. f:id:sample:favorite
---- out
-Here is my favorite. <a href="http://f.hatena.ne.jp/sample/favorite" target="_blank">f:id:sample:favorite</a>
-
-=== 06_autolink_hatenafotolife.t 3
---- in a_target_blank do_auto_link
-Yukidaruma. f:id:jkondo:20060121153528j:image
---- out
-Yukidaruma. <a href="http://f.hatena.ne.jp/jkondo/20060121153528" target="_blank"><img src="http://f.hatena.ne.jp/images/fotolife/j/jkondo/20060121/20060121153528.jpg" alt="f:id:jkondo:20060121153528j:image" title="f:id:jkondo:20060121153528j:image"></a>
-
-=== 06_autolink_hatenafotolife.t 4
---- in a_target_blank do_auto_link
-Sky photos. [f:t:空]
---- out
-Sky photos. <a href="http://f.hatena.ne.jp/t/%e7%a9%ba" target="_blank">f:t:空</a>
-
-=== 06_autolink_hatenafotolife.t 5
---- in a_target_blank do_auto_link
-Cinnamon photos. [f:keyword:しなもん]
---- out
-Cinnamon photos. <a href="http://f.hatena.ne.jp/keyword/%e3%81%97%e3%81%aa%e3%82%82%e3%82%93" target="_blank">f:keyword:しなもん</a>
-
 === 07_autolink_hatenagroup.t 1
 --- in a_target_blank do_auto_link
 This is my archive. g:hatena:id:sample:archive
