@@ -10,8 +10,8 @@ module Text
           [@@pattern]
         end
 
-        def parse(text, opt)
-          return unless @@pattern =~ text
+        def parse(text, opt = {})
+          return if @@pattern !~ text
           content, name, type = $1, $2, $3 || ''
           case type
           when 'image'
