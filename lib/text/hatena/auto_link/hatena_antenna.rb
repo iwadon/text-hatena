@@ -4,7 +4,7 @@ module Text
   class Hatena
     class AutoLink
       class HatenaAntenna < Scheme
-        @@pattern = /\[?(a:id:([A-Za-z][a-zA-Z0-9_\-][2,14]))\]?/i
+        @@pattern = /\[?(a:id:([A-Za-z][a-zA-Z0-9_\-]{2,14}))\]?/i
 
         def patterns
           [@@pattern]
