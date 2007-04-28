@@ -12,7 +12,7 @@ class TextHatenaAutoLinkHatenaQuestionTest < Test::Base
 
   def hatenaize(value)
     value.gsub(@pat) do
-      @t.parse(value)
+      @t.parse($&)
     end
   end
 end
