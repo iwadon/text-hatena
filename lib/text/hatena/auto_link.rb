@@ -19,7 +19,7 @@ module Text
         "ftp" => "Text::Hatena::AutoLink::FTP",
         "jan" => "Text::Hatena::AutoLink::EAN",
         "map" => "Text::Hatena::AutoLink::HatenaMap",
-#        "tex" => "Text::Hatena::AutoLink::Tex",
+        "tex" => "Text::Hatena::AutoLink::Tex",
         "id" => "Text::Hatena::AutoLink::HatenaID",
         "a" => "Text::Hatena::AutoLink::HatenaAntenna",
         "b" => "Text::Hatena::AutoLink::HatenaBookmark",
