@@ -23,7 +23,7 @@ module Text
         "id" => "Text::Hatena::AutoLink::HatenaID",
         "a" => "Text::Hatena::AutoLink::HatenaAntenna",
         "b" => "Text::Hatena::AutoLink::HatenaBookmark",
-#        "d" => "Text::Hatena::AutoLink::HatenaDiary",
+        "d" => "Text::Hatena::AutoLink::HatenaDiary",
         "f" => "Text::Hatena::AutoLink::HatenaFotolife",
         "g" => "Text::Hatena::AutoLink::HatenaGroup",
         "i" => "Text::Hatena::AutoLink::HatenaIdea",
