@@ -34,6 +34,9 @@ module Text
             c.shiftline
             nl = c.nextline
             content = $2
+            text = Text.new({:context => @context})
+            text.parse(content)
+            content = text.html
             if nl =~ @pattern && $1.size > @llevel
               c.htmllines("#{t}\t<li>#{content}")
               @open += 1
