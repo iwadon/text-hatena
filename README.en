@@ -4,11 +4,11 @@ Text::Hatena -- A Ruby library for Hatena notation
 
 == SYNOPSIS
 
-require 'text/hatena'
+  require 'text/hatena'
 
-parser = Text::Hatena.new
-parser.parse(text)
-html = parser.to_html
+  parser = Text::Hatena.new
+  parser.parse(text)
+  html = parser.to_html
 
 == DESCRIPTION
 
@@ -39,7 +39,8 @@ Or, you can use Rubygems and Rake to install.
 
 == CONTRIBUTOR
 
-- drawnboy <drawnboy@shibuya.pl>
+- drawnboy <http://d.hatena.ne.jp/drawnboy/>
+- Yune Kotomi <http://yune-kotomi.tarenari.jp/>
 
 == LICENSE
 
