@@ -58,11 +58,6 @@ class TextHatenaAutoLinkTest < Test::Base
 end
 
 __END__
-=== 02_autolink_text.t 1
---- in do_auto_link
-Hi, this is a simple text.
---- out
-Hi, this is a simple text.
 
 === 03_autolink_http.t 1
 --- in do_auto_link
