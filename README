@@ -110,7 +110,7 @@ Rubyと同じライセンスとします。詳しくは
 岩月博之 ((<URL:mailto:don@na.rim.or.jp>)) が Perl 版 Text::Hatena
 0.01 を移植しました。
 
-* ((<Text::Hatena|URL:http://moonrock.jp:23000/articles/2005/10/01/text-hatena>))
+* ((<Text::Hatena|URL:http://moonrock.jp/~don/ruby/text-hatena/>))
 
 Perl 版 Text::Hatena 0.06 への対応は drawnboy さんによるものです。
 
@@ -128,3 +128,6 @@ MoonWolf さん作成の htmlsplit.rb に堀川久さん作成のパッチを適用したもの
 
 * ((<htmlsplit.rb|URL:http://www.moonwolf.com/ruby/htmlsplit.html>))
 * ((<"htmlsplit / htmlrepair"|URL:http://www.nslabs.jp/htmlsplit.rhtml>))
+
+殊海夕音さんからは不具合の報告やテストコードを頂きました。ありがとうご
+ざいました。
