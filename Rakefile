@@ -28,11 +28,11 @@ rescue LoadError
 end
 
 PKG_NAME = 'text-hatena'
-PKG_VERS = '0.12.20070429.0'
+PKG_VERS = '0.12.20070516.0'
 spec = Gem::Specification.new do |s|
   s.name = PKG_NAME
   s.version = PKG_VERS
-  s.summary = "A module for using Hatena text format"
+  s.summary = "A Ruby library for Hatena notation"
   s.require_path = 'lib'
   s.files = Dir.glob('{lib,test}/**/*')
   s.has_rdoc = true
