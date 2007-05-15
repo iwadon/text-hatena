@@ -17,7 +17,7 @@ module Text
           @domain = 'map.hatena.ne.jp'
         end
 
-        def parse(text, opts)
+        def parse(text, opt = {})
           case text
           when @@pattern_tag
             _parse_tag(text)
