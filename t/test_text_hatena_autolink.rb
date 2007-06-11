@@ -174,7 +174,7 @@ Here is my book. <a href="http://d.hatena.ne.jp/asin/4798110523" target="_blank"
 --- in a_target_blank do_auto_link
 Here is my book. ISBN:4798110523:image
 --- out
-Here is my book. <a href="http://d.hatena.ne.jp/asin/4798110523" target="_blank"><img src="http://images-jp.amazon.com/images/P/4798110523.09.MZZZZZZZ.jpg" alt="「へんな会社」のつくり方" title="「へんな会社」のつくり方" class="asin"></a>
+Here is my book. <a href="http://d.hatena.ne.jp/asin/4798110523" target="_blank"><img src="http://ec1.images-amazon.com/images/I/21DMWVBQP5L.jpg" alt="「へんな会社」のつくり方" title="「へんな会社」のつくり方" class="asin"></a>
 
 === 08_autolink_asin.t 3
 --- in a_target_blank do_auto_link
