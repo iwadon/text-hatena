@@ -9,6 +9,7 @@ module Text
         @in_paragraph = false
         @in_anchor = false
         @in_superpre = false
+        @in_quote = nil
         init
       end
 
@@ -76,6 +77,8 @@ module Text
           @in_anchor = true
         elsif tagname == "pre" and attr["class"] == "hatena-super-pre"
           @in_superpre = true
+        elsif tagname == "blockquote" or tagname == "q"
+          @in_quote = attr.dup
         end
 #        @html << text
         if @allowtag =~ tagname
@@ -108,6 +111,15 @@ module Text
           @in_anchor = false
         elsif tagname == 'pre' and @in_superpre
           @in_superpre = false
+        elsif tagname == 'blockquote' or tagname == "q"
+          attr = @in_quote || {}
+          @in_quote = nil
+          cite = attr["cite"].to_s
+          unless cite.empty?
+            title = attr["title"].to_s
+            title = "*" if title.empty?
+            @html << "<cite><a href=\"#{sanitize_url(cite)}\">#{sanitize(title)}</a></cite>"
+          end
         end
         if @allowtag =~ tagname
           @html << "</#{tagname}>"
