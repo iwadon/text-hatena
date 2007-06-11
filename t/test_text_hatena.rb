@@ -241,6 +241,22 @@ Hatena
 
 ===
 ;;; in
+This is <q cite="http://www.hatena.ne.jp/">a inline quote</q>.
+;;; out
+<div class="section">
+	<p>This is <q cite="http://www.hatena.ne.jp/">a inline quote<cite><a href="http://www.hatena.ne.jp/">*</a></cite></q>.</p>
+</div>
+
+===
+;;; in
+This is <q cite="http://www.hatena.ne.jp/" title="Hatena">a inline quote</q>.
+;;; out
+<div class="section">
+	<p>This is <q cite="http://www.hatena.ne.jp/" title="Hatena">a inline quote<cite><a href="http://www.hatena.ne.jp/">Hatena</a></cite></q>.</p>
+</div>
+
+===
+;;; in
 Here is the way to make link.
 >||
 http://www.hatena.ne.jp/
