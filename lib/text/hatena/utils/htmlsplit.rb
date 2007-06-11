@@ -90,7 +90,11 @@ class OrderedHash
   end
 
   def [](key)
-    values[@keys.index(key)]
+    if index = @keys.index(key)
+      values[index]
+    else
+      nil
+    end
   end
 
   def each
