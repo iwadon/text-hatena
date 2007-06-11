@@ -34,7 +34,7 @@ spec = Gem::Specification.new do |s|
   s.version = PKG_VERS
   s.summary = "A Ruby library for Hatena notation"
   s.require_path = 'lib'
-  s.files = Dir.glob('{lib,test}/**/*')
+  s.files = Dir.glob('{lib,t}/**/*')
   s.has_rdoc = true
 end
 Rake::GemPackageTask.new(spec) do |t|
