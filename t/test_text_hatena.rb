@@ -217,6 +217,30 @@ lines
 
 ===
 ;;; in
+><blockquote cite="http://www.hatena.ne.jp/">
+Hatena
+</blockquote><
+;;; out
+<div class="section">
+	<blockquote cite="http://www.hatena.ne.jp/">
+		Hatena
+	<cite><a href="http://www.hatena.ne.jp/">*</a></cite></blockquote>
+</div>
+
+===
+;;; in
+><blockquote cite="http://www.hatena.ne.jp/" title="Hatena">
+Hatena
+</blockquote><
+;;; out
+<div class="section">
+	<blockquote cite="http://www.hatena.ne.jp/" title="Hatena">
+		Hatena
+	<cite><a href="http://www.hatena.ne.jp/">Hatena</a></cite></blockquote>
+</div>
+
+===
+;;; in
 Here is the way to make link.
 >||
 http://www.hatena.ne.jp/
