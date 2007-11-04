@@ -57,11 +57,11 @@ module Text
                     require underscore(p)
                     get_class(p)
                   end
-          @parser[scheme] = klass.new(option)
           option = @scheme_option[scheme.to_s] || @scheme_option[scheme.intern] || {}
           unless option.key?(:a_target)
             option[:a_target] = @a_target
           end
+          @parser[scheme] = klass.new(option)
           next if known[p]
           known[p] = true
           pattern << @parser[scheme].pattern
