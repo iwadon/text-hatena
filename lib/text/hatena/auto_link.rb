@@ -51,12 +51,17 @@ module Text
         SCHEMES.each_key do |scheme|
           next if invalid[scheme]
           p = SCHEMES[scheme]
-          require underscore(p)
+          klass = begin
+                    get_class(p)
+                  rescue NameError
+                    require underscore(p)
+                    get_class(p)
+                  end
+          @parser[scheme] = klass.new(option)
           option = @scheme_option[scheme.to_s] || @scheme_option[scheme.intern] || {}
           unless option.key?(:a_target)
             option[:a_target] = @a_target
           end
-          @parser[scheme] = get_class(p).new(option)
           next if known[p]
           known[p] = true
           pattern << @parser[scheme].pattern
