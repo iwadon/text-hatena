@@ -22,8 +22,7 @@ module Text
           word = $1
           return sprintf('<a href="http://%s/exec/obidos/external-search?mode=blended&tag=%s&encoding-string-jp=%s&keyword=%s"%s>amazon:%s</a>',
                          @domain, @amazon_affiliate_id,
-
-                         html_encode('日本語'), html_encode(word),
+                         html_encode('\346\227\245\346\234\254\350\252\236'), html_encode(word),
                          @a_target_string, word)
         end
       end
