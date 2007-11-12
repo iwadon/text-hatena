@@ -56,7 +56,7 @@ module Text
             emptyelemtaghandler(tag.name, tag.attr, text)
           when HTMLSplit::EndTag
             endhandler(tag.name, text)
-          when HTMLSplit::CharacterData
+          when HTMLSplit::CharacterData, HTMLSplit::ERuby
             texthandler(text)
           when HTMLSplit::Comment
             commenthandler(text)
@@ -66,7 +66,7 @@ module Text
 
       def texthandler(text)
         text = @context.texthandler.call(text, @context, self)
-        @html << text
+        @html << sanitize(text)
       end
 
       def starthandler(tagname, attr, text)
