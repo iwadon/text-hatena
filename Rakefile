@@ -28,7 +28,7 @@ rescue LoadError
 end
 
 PKG_NAME = 'text-hatena'
-PKG_VERS = '0.12.20071105.2'
+PKG_VERS = '0.12.20071112.0'
 spec = Gem::Specification.new do |s|
   s.name = PKG_NAME
   s.version = PKG_VERS
