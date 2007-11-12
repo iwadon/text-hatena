@@ -56,10 +56,11 @@ module Text
             emptyelemtaghandler(tag.name, tag.attr, text)
           when HTMLSplit::EndTag
             endhandler(tag.name, text)
-          when HTMLSplit::CharacterData, HTMLSplit::ERuby
-            texthandler(text)
           when HTMLSplit::Comment
             commenthandler(text)
+          #when HTMLSplit::CharacterData, HTMLSplit::ERuby
+          else
+            texthandler(text)
           end
         end
       end
