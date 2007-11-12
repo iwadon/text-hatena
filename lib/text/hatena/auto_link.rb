@@ -54,7 +54,11 @@ module Text
           klass = begin
                     get_class(p)
                   rescue NameError
-                    require underscore(p)
+                    begin
+                      require underscore(p)
+                    rescue LoadError
+                      next
+                    end
                     get_class(p)
                   end
           option = @scheme_option[scheme.to_s] || @scheme_option[scheme.intern] || {}
