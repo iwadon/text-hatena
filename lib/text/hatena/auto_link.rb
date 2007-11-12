@@ -103,9 +103,11 @@ module Text
       end
 
       def get_class(str)
-        str.split(/::/).inject(Object) do |klass, s|
+        it = str.split(/::/).inject(Object) do |klass, s|
           klass.const_get(s)
         end
+        raise NameError unless it.name == str
+        it
       end
     end
   end
