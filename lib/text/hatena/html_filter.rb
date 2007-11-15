@@ -58,16 +58,17 @@ module Text
             endhandler(tag.name, text)
           when HTMLSplit::Comment
             commenthandler(text)
-          #when HTMLSplit::CharacterData, HTMLSplit::ERuby
-          else
+          when HTMLSplit::CharacterData
             texthandler(text)
+          else
+            texthandler(sanitize(text))
           end
         end
       end
 
       def texthandler(text)
         text = @context.texthandler.call(text, @context, self)
-        @html << sanitize(text)
+        @html << text
       end
 
       def starthandler(tagname, attr, text)
