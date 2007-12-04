@@ -4,7 +4,7 @@ module Text
   class Hatena
     class DlNode < Node
       def init
-        @pattern = /^\:((?:<[^>]+>|\[\].+?\[\]|\[[^\]]+\]|\[\]|[^\:<\[]+)+)\:(.+)$/
+        @pattern = /^\:((?:<[^>]+>|\[\].+?\[\]|\[[^\]]+\]|\[\]|[^\:<\[])+)\:(.+)$/
       end
 
       def parse
