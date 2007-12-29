@@ -13,18 +13,13 @@ module Text
       @ilevel = Integer(args[:ilevel]) || 0 # level of default indent
       @invalidnode = args[:invalidnode] || []
       @sectionanchor = args[:sectionanchor] || "o-"
+      @autolink_option = args[:autolink_option] || {}
       @texthandler = args[:texthandler] || Proc.new do |text, c, hp|
         if hp.in_anchor or hp.in_superpre
           text
         else
           p = c.permalink
-          unless al = c.autolink
-            # cache instance
-            require "text/hatena/auto_link"
-            a = AutoLink.new(args[:autolink_option])
-            c.autolink(a)
-            al = a
-          end
+          al = c.autolink
           text = al.parse(text, {
                             :in_paragraph => hp.in_paragraph
                           })
@@ -39,7 +34,8 @@ module Text
                                :baseuri => @baseuri,
                                :permalink => @permalink,
                                :invalidnode => @invalidnode,
-                               :sectionanchor => @sectionanchor, 
+                               :sectionanchor => @sectionanchor,
+                               :autolink_option => @autolink_option,
                                :texthandler => @texthandler })
       c = @context
       node = BodyNode.new({ :context => c,

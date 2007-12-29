@@ -1,3 +1,5 @@
+require "text/hatena/auto_link"
+
 module Text
   class Hatena
     class Context
@@ -7,6 +9,7 @@ module Text
         @permalink = args[:permalink]
         @invalidnode = args[:invalidnode]
         @sectionanchor = args[:sectionanchor]
+        @autolink_option = args[:autolink_option]
         @texthandler = args[:texthandler]
         @htmllines = []
         @html = ""
@@ -74,6 +77,7 @@ module Text
 
       def autolink(*args)
         @autolink = args[0] unless args.empty?
+        @autolink ||= AutoLink.new(@autolink_option)
         @autolink
       end
 
@@ -101,7 +105,7 @@ module Text
         @sectionanchor
       end
 
-      def texthandler 
+      def texthandler
         @texthandler
       end
     end
