@@ -4,7 +4,7 @@ module Text
   class Hatena
     class BlockquoteNode < SectionNode
       def init
-        @pattern = /^>([^>]*)>$/
+        @pattern = /^>((?!<).*)>$/
         @endpattern = /^<<$/
         @childnode = %w(h4 h5 blockquote dl list pre superpre table tagline tag)
         # @startstring = "<blockquote>"
