@@ -61,3 +61,13 @@ __END__
 		<p>はてな</p>
 	<cite><a href="http://www.hatena.ne.jp/">はてな</a></cite></blockquote>
 </div>
+
+=== 5
+--- in
+><blockquote cite="http://journal.mycom.co.jp/articles/2007/06/07/gears/index.html" title="【ハウツー】"ブラウザ+Gears"でここまでできる! Google GearsのDB機能を使ってみよう (1) Gearsの持つ組み込みデータベース | エンタープライズ | マイコミジャーナル"><
+Gearsによるデータベースアクセス方法は、JDBCなどによく似ているため習得するのは容易だ。以下に、そのほとんどを網羅した疑似的なコードを掲載するので参考にしてほしい。
+></blockquote><
+--- out
+<blockquote title="【ハウツー】" cite="http://journal.mycom.co.jp/articles/2007/06/07/gears/index.html">
+<p>Gearsによるデータベースアクセス方法は、JDBCなどによく似ているため習得するのは容易だ。以下に、そのほとんどを網羅した疑似的なコードを掲載するので参考にしてほしい。</p>
+<cite><a href="http://journal.mycom.co.jp/articles/2007/06/07/gears/index.html">【ハウツー】</a></cite></blockquote>
