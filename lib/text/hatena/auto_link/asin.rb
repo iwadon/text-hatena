@@ -20,7 +20,7 @@ module Text
   <ul>
     <% if prop.artists %><li><span class="hatena-asin-detail-label">\343\202\242\343\203\274\343\203\206\343\202\243\343\202\271\343\203\210:</span><% prop.artists.each do |artist| %><a href="<%= h(@keyword_url) %><%= h(artist) %>" class="keyword"><%= h(artist) %></a><% end %></li><% end %>
     <% if prop.authors %><li><span class="hatena-asin-detail-label">\344\275\234\350\200\205:</span><% prop.authors.each do |author| %><a href="<%= h(@keyword_url) %><%= h(author) %>" class="keyword"><%= h(author) %></a><% end %></li><% end %>
-    <% if prop.manufacturer %><li><span class="hatena-asin-detail-label">\345\207\272\347\211\210\347\244\276/343\203\241\343\203\274\343\202\253\343\203\274:</span>
+    <% if prop.manufacturer %><li><span class="hatena-asin-detail-label">\345\207\272\347\211\210\347\244\276/\343\203\241\343\203\274\343\202\253\343\203\274:</span>
     <a href="<%= h(@keyword_url) %><%= h(prop.manufacturer) %>" class="keyword">
       <%= h(prop.manufacturer) %>
     </a>
