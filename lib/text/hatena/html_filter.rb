@@ -88,7 +88,7 @@ module Text
           unless attr.nil?
             attr.each do |p, v|
               if @allallowattr =~ p
-              elsif @allowattr[tagname.intern] || /^#{@allowattr[tagname.intern]}$/i =~ p
+              elsif @allowattr[tagname.intern] and /^#{@allowattr[tagname.intern]}$/i =~ p
               else
                 next
               end
