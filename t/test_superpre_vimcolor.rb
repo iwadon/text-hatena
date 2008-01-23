@@ -4,6 +4,7 @@ require "text/hatena"
 class TextHatenaSuperpreVimColorTest < Test::Base
   filters %w(.chomp)
   filters :in => 'hatenaize'
+  delimitors '###', '@@@'
   run_equal :out, :in
 
   def hatenaize(value)
@@ -14,30 +15,30 @@ class TextHatenaSuperpreVimColorTest < Test::Base
 end
 
 __END__
-=== 1
---- in
+### 1
+@@@ in
 >||
 ||<
---- out
+@@@ out
 <div class="section">
 	<pre class="hatena-super-pre">
 </pre>
 </div>
 
-=== 2
---- in
+### 2
+@@@ in
 >||
 はてな
 ||<
---- out
+@@@ out
 <div class="section">
 	<pre class="hatena-super-pre">
 はてな
 </pre>
 </div>
 
-=== 2
---- in
+### 2
+@@@ in
 >||
 int main(int argc, char *argv[])
 {
@@ -45,7 +46,7 @@ int main(int argc, char *argv[])
   return 0;
 }
 ||<
---- out
+@@@ out
 <div class="section">
 	<pre class="hatena-super-pre">
 int main(int argc, char *argv[])
@@ -56,8 +57,8 @@ int main(int argc, char *argv[])
 </pre>
 </div>
 
-=== 3
---- in
+### 3
+@@@ in
 >|c|
 int main(int argc, char *argv[])
 {
@@ -65,7 +66,7 @@ int main(int argc, char *argv[])
   return 0;
 }
 ||<
---- out
+@@@ out
 <div class="section">
 	<pre class="hatena-super-pre">
 <span class="synType">int</span> main(<span class="synType">int</span> argc, <span class="synType">char</span> *argv[])
@@ -76,14 +77,14 @@ int main(int argc, char *argv[])
 </pre>
 </div>
 
-=== 4
---- in
+### 4
+@@@ in
 >|ruby|
 if a < b
   puts("こんにちは。")
 end
 ||<
---- out
+@@@ out
 <div class="section">
 	<pre class="hatena-super-pre">
 <span class="synStatement">if</span><span class="synrubyConditionalExpression"> a &lt; b</span>
