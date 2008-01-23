@@ -36,6 +36,9 @@ spec = Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.files = Dir.glob('{lib,t}/**/*')
   s.has_rdoc = true
+  s.author = 'Hiroyuki Iwatsuki'
+  s.email = 'don@na.rim.or.jp'
+  s.homepage = 'http://moonrock.jp/~don/ruby/text-hatena/'
 end
 Rake::GemPackageTask.new(spec) do |t|
   t.need_tar = true
