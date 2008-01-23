@@ -75,3 +75,19 @@ int main(int argc, char *argv[])
 }
 </pre>
 </div>
+
+=== 4
+--- in
+>|ruby|
+if a < b
+  puts("こんにちは。")
+end
+||<
+--- out
+<div class="section">
+	<pre class="hatena-super-pre">
+<span class="synStatement">if</span><span class="synrubyConditionalExpression"> a &lt; b</span>
+<span class="synrubyConditionalExpression">  puts(</span><span class="synSpecial">&quot;</span><span class="synConstant">こんにちは。</span><span class="synSpecial">&quot;</span><span class="synrubyConditionalExpression">)</span>
+<span class="synStatement">end</span>
+</pre>
+</div>
