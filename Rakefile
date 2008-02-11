@@ -9,7 +9,7 @@ task :default => :test
 
 Rake::RDocTask.new do |t|
   t.rdoc_dir = 'rdoc'
-  t.rdoc_files.include('README.en', 'lib/**/*.rb')
+  t.rdoc_files.include('README.rdoc', 'lib/**/*.rb')
   t.options << '--charset' << 'utf-8'
   t.template = 'kilmer'
 end
@@ -28,13 +28,13 @@ rescue LoadError
 end
 
 PKG_NAME = 'text-hatena'
-PKG_VERS = '0.12.20080123.0'
+PKG_VERS = '0.12.20080211.0'
 spec = Gem::Specification.new do |s|
   s.name = PKG_NAME
   s.version = PKG_VERS
   s.summary = "A Ruby library for Hatena notation"
   s.require_path = 'lib'
-  s.files = Dir.glob('{lib,t}/**/*')
+  s.files = Dir.glob('{lib,t}/**/*') + %w(README README.en README.rdoc Rakefile)
   s.has_rdoc = true
   s.author = 'Hiroyuki Iwatsuki'
   s.email = 'don@na.rim.or.jp'
