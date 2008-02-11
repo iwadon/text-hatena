@@ -15,12 +15,19 @@ Text::Hatena -- A Ruby library for Hatena notation
 Text::Hatena parses the document with Hatena notation, and translate
 to HTML format.
 
+This library is based on Perl's Text::Hatena.
+
+* ((<"Junya Kondo / Text-Hatena - search.cpan.org"|URL:http://search.cpan.org/dist/Text-Hatena/>))
+  
 == DOWNLOAD
 
-Sorry, Text::Hatena has no package files yet.  Instead, you can get
-from Subversion repository.
+You can get archive files from my web page
 
-  % svn co http://moonrock.jp/~don/svn/text-hatena/tags/text-hatena-0.06
+* ((<URL:http://moonrock.jp/~don/ruby/text-hatena/>))
+
+Subversion repository is here:
+
+* ((<URL:http://moonrock.jp/~don/svn/text-hatena/>))
 
 == INSTALLATION
 
@@ -45,10 +52,11 @@ Or, you can use Rubygems and Rake to install.
 
 == LICENSE
 
-Text::Hatena is released under the Ruby license.
+Text::Hatena is released under the Ruby license.  Please see
+((<URL:http://www.ruby-lang.org/ja/LICENSE.txt>)).
 
 == SUPPORT
 
-Text::Hatena homepage is http://moonrock.jp/~don/ruby/text-hatena/.
+Text::Hatena homepage is ((<URL:http://moonrock.jp/~don/ruby/text-hatena/>)).
 
-For other information, feel free to contact mailto:don@na.rim.or.jp.
+For other information, feel free to contact ((<URL:mailto:don@na.rim.or.jp>)).
