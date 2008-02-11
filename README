@@ -20,11 +20,11 @@ Text::Hatena です。Perl で書かれたコードのロジックなどを可能な限り変更
 
 以下のウェブページにてアーカイブファイルを公開しています。
 
-  http://moonrock.jp/~don/ruby/text-hatena/
+* ((<URL:http://moonrock.jp/~don/ruby/text-hatena/>))
 
 また、Subversionのリポジトリもご利用いただけます。
 
-  http://moonrock.jp/~don/svn/text-hatena/
+* ((<URL:http://moonrock.jp/~don/svn/text-hatena/>))
 
 
 == インストール
@@ -59,55 +59,55 @@ setup.rb を使います。
 
 == Text::Hatena クラス
 
---- Text::Hatena.new(args = {})
+: Text::Hatena.new(args = {})
 
-    Text::Hatena クラスのオブジェクトを新しく作ります。Text::Hatena オ
-    ブジェクトを返します。
+  Text::Hatena クラスのオブジェクトを新しく作ります。Text::Hatena オ
+  ブジェクトを返します。
 
-    次の様に使います:
+  次の様に使います:
 
-      parser = Text::Hatena.new
+    parser = Text::Hatena.new
 
-    省略可能な引数(args)として Hash オブジェクトを与えることが出来ます。
-    キーには以下のシンボルを使います。
+  省略可能な引数(args)として Hash オブジェクトを与えることが出来ます。
+  キーには以下のシンボルを使います。
 
-    * :baseuri
-    * :parmalink
-    * :ilevel
-    * :invalidnode
-    * :sectionanchor
-    * :texthandler
+  * :baseuri
+  * :parmalink
+  * :ilevel
+  * :invalidnode
+  * :sectionanchor
+  * :texthandler
 
-    次の様に指定します:
+  次の様に指定します:
 
-      parser = Text::Hatena.new({
-        :parmalink => 'http://www.example.com/entry/123',
-        :sectionanchor => '_'
-      })
+    parser = Text::Hatena.new({
+      :parmalink => 'http://www.example.com/entry/123',
+      :sectionanchor => '_'
+    })
 
---- Text::Hatena#parse(string)
+: Text::Hatena#parse(string)
 
-    文字列(string)を解釈して、HTML 形式に変換します。
+  文字列(string)を解釈して、HTML 形式に変換します。
 
-    次のように使います:
+  次のように使います:
 
-      parser.parse("")
+    parser.parse("")
 
---- Text::Hatena#html
+: Text::Hatena#html
 
-    HTML 形式に変換された結果を文字列として返します。
+  HTML 形式に変換された結果を文字列として返します。
 
-    次のように使いますと:
+  次のように使いますと:
 
-      parser = Text::Hatena.new
-      parser.parse("*title")
-      puts parser.html
+    parser = Text::Hatena.new
+    parser.parse("*title")
+    puts parser.html
 
-    標準出力には以下のように出力されます:
+  標準出力には以下のように出力されます:
 
-      <div class="section">
-              <h3><a name="p1" href="#p1"><span class="sanchor">o-</span></a> title</h3>
-      </div>
+    <div class="section">
+            <h3><a name="p1" href="#p1"><span class="sanchor">o-</span></a> title</h3>
+    </div>
 
 
 == ライセンス
