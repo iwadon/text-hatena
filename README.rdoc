@@ -17,17 +17,17 @@ to HTML format.
 
 This library is based on Perl's Text::Hatena.
 
-* ((<"Junya Kondo / Text-Hatena - search.cpan.org"|URL:http://search.cpan.org/dist/Text-Hatena/>))
+* Junya Kondo / Text-Hatena - search.cpan.org (http://search.cpan.org/dist/Text-Hatena/)
   
 == DOWNLOAD
 
-You can get archive files from my web page
+You can get archive files from my web page:
 
-* ((<URL:http://moonrock.jp/~don/ruby/text-hatena/>))
+* http://moonrock.jp/~don/ruby/text-hatena/
 
 Subversion repository is here:
 
-* ((<URL:http://moonrock.jp/~don/svn/text-hatena/>))
+* http://moonrock.jp/~don/svn/text-hatena/
 
 == INSTALLATION
 
@@ -42,21 +42,21 @@ Or, you can use Rubygems and Rake to install.
 
 == AUTHOR
 
-* Hiroyuki Iwatsuki (((<URL:mailto:don@na.rim.or.jp>)))
+* Hiroyuki Iwatsuki (mailto:don@na.rim.or.jp)
 
 == CONTRIBUTORS
 
-* drawnboy (((<URL:http://d.hatena.ne.jp/drawnboy/>)))
-* Yune Kotomi (((<URL:http://yune-kotomi.tarenari.jp/>)))
-* Seki (((<URL:http://d.hatena.ne.jp/m_seki/>)))
+* drawnboy (http://d.hatena.ne.jp/drawnboy/)
+* Yune Kotomi (http://yune-kotomi.tarenari.jp/)
+* Seki (http://d.hatena.ne.jp/m_seki/)
 
 == LICENSE
 
 Text::Hatena is released under the Ruby license.  Please see
-((<URL:http://www.ruby-lang.org/ja/LICENSE.txt>)).
+http://www.ruby-lang.org/ja/LICENSE.txt.
 
 == SUPPORT
 
-Text::Hatena homepage is ((<URL:http://moonrock.jp/~don/ruby/text-hatena/>)).
+Text::Hatena homepage is http://moonrock.jp/~don/ruby/text-hatena/.
 
-For other information, feel free to contact ((<URL:mailto:don@na.rim.or.jp>)).
+For other information, feel free to contact mailto:don@na.rim.or.jp.
