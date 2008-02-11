@@ -16,6 +16,17 @@ Text::Hatena です。Perl で書かれたコードのロジックなどを可能な限り変更
 いただけるはずです。
 
 
+== 入手方法
+
+以下のウェブページにてアーカイブファイルを公開しています。
+
+  http://moonrock.jp/~don/ruby/text-hatena/
+
+また、Subversionのリポジトリもご利用いただけます。
+
+  http://moonrock.jp/~don/svn/text-hatena/
+
+
 == インストール
 
 setup.rb を使います。
