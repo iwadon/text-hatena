@@ -1,0 +1,146 @@
+= Ruby 版 Text::Hatena
+
+
+== 説明
+
+Text::Hatena とは、近藤淳也さんによって Perl で書かれたライブラリで、は
+てな記法で書かれたテキストを解釈し、HTML 形式に変換します。はてな記法と
+は、はてなダイアリーで使われている書式です。
+
+* ((<"Junya Kondo / Text-Hatena - search.cpan.org"|URL:http://search.cpan.org/dist/Text-Hatena/>))
+* ((<はてなダイアリー - キーワードでつながる面白ブログ|URL:http://d.hatena.ne.jp/>))
+
+その Text::Hatena を Ruby へそのまま移植したものがこの Ruby 版
+Text::Hatena です。Perl で書かれたコードのロジックなどを可能な限り変更
+しないように移植したつもりですので、Perl 版 Text::Hatena と同様にお使い
+いただけるはずです。
+
+
+== 入手方法
+
+以下のウェブページにてアーカイブファイルを公開しています。
+
+* ((<URL:http://moonrock.jp/~don/ruby/text-hatena/>))
+
+また、Subversionのリポジトリもご利用いただけます。
+
+* ((<URL:http://moonrock.jp/~don/svn/text-hatena/>))
+
+
+== インストール
+
+setup.rb を使います。
+
+  % ruby setup.rb
+
+お使いの OS によっては sudo コマンドを使う必要があるかもしれません。
+
+  % sudo ruby setup.rb
+
+
+== 使い方
+
+(1) text/hatena を require します。
+
+      require "text/hatena"
+
+(2) Text::Hatena オブジェクトを作ります。
+
+      parser = Text::Hatena.new
+
+(3) Text::Hatena#parse メソッドを使って変換します。
+
+      parser.parse(text)
+
+(4) Text::Hatena#html メソッドから変換結果を取り出します。
+
+      html = parser.html
+
+
+== Text::Hatena クラス
+
+: Text::Hatena.new(args = {})
+
+  Text::Hatena クラスのオブジェクトを新しく作ります。Text::Hatena オ
+  ブジェクトを返します。
+
+  次の様に使います:
+
+    parser = Text::Hatena.new
+
+  省略可能な引数(args)として Hash オブジェクトを与えることが出来ます。
+  キーには以下のシンボルを使います。
+
+  * :baseuri
+  * :parmalink
+  * :ilevel
+  * :invalidnode
+  * :sectionanchor
+  * :texthandler
+
+  次の様に指定します:
+
+    parser = Text::Hatena.new({
+      :parmalink => 'http://www.example.com/entry/123',
+      :sectionanchor => '_'
+    })
+
+: Text::Hatena#parse(string)
+
+  文字列(string)を解釈して、HTML 形式に変換します。
+
+  次のように使います:
+
+    parser.parse("")
+
+: Text::Hatena#html
+
+  HTML 形式に変換された結果を文字列として返します。
+
+  次のように使いますと:
+
+    parser = Text::Hatena.new
+    parser.parse("*title")
+    puts parser.html
+
+  標準出力には以下のように出力されます:
+
+    <div class="section">
+            <h3><a name="p1" href="#p1"><span class="sanchor">o-</span></a> title</h3>
+    </div>
+
+
+== ライセンス
+
+Rubyと同じライセンスとします。詳しくは
+((<URL:http://www.ruby-lang.org/ja/LICENSE.txt>)) をご覧ください。
+
+
+== 著者
+
+岩月博之 ((<URL:mailto:don@na.rim.or.jp>)) が Perl 版 Text::Hatena
+0.01 を移植しました。
+
+* ((<Text::Hatena|URL:http://moonrock.jp/~don/ruby/text-hatena/>))
+
+Perl 版 Text::Hatena 0.06 への対応は drawnboy さんによるものです。
+
+* ((<Nowhere Near - Text::Hatena 0.06|URL:http://d.hatena.ne.jp/drawnboy/20060118/1137543907>))
+
+
+== 謝辞
+
+drawnboy さんから Perl 版 Text::Hatena 0.06 への対応差分を頂きました。
+ありがとうございました。
+
+このライブラリに含まれる lib/text/hatena/utils/htmlsplit.rb は、
+MoonWolf さん作成の htmlsplit.rb に堀川久さん作成のパッチを適用したもの
+です。有用なライブラリの公開に感謝いたします。
+
+* ((<htmlsplit.rb|URL:http://www.moonwolf.com/ruby/htmlsplit.html>))
+* ((<"htmlsplit / htmlrepair"|URL:http://www.nslabs.jp/htmlsplit.rhtml>))
+
+殊海夕音さんからは不具合の報告やテストコードを頂きました。ありがとうご
+ざいました。
+
+咳さんからは不具合の報告や修正案を頂きました。ありがとうございました。
