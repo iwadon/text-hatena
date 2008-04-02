@@ -1,6 +1,10 @@
 require "erb"
 require "open-uri"
-require "amazon/search"
+begin
+  require "amazon/aws"
+  require "amazon/aws/search"
+rescue LoadError
+end
 require "text/hatena/auto_link/scheme"
 
 module Text
@@ -14,19 +18,19 @@ module Text
         @@detail_template = <<END
 <div class="hatena-asin-detail">
   <a href="<%= h(asin_url || url) %>">
-    <img src="<%= h(prop.image_url_small || prop.image_url_large || prop.image_url_medium) %>" class="hatena-asin-detail-image" alt="<%= h(title) %>" title="<%= h(title) %>"></a>
+    <img src="<%= h((prop.small_image || prop.large_image || prop.medium_image).url) %>" class="hatena-asin-detail-image" alt="<%= h(title) %>" title="<%= h(title) %>"></a>
   <div class="hatena-asin-detail-info">
   <p class="hatena-asin-detail-title"><a href="<%= h(asin_url) %>"><%= h(title) %></a></p>
   <ul>
     <% if prop.artists %><li><span class="hatena-asin-detail-label">\343\202\242\343\203\274\343\203\206\343\202\243\343\202\271\343\203\210:</span><% prop.artists.each do |artist| %><a href="<%= h(@keyword_url) %><%= h(artist) %>" class="keyword"><%= h(artist) %></a><% end %></li><% end %>
-    <% if prop.authors %><li><span class="hatena-asin-detail-label">\344\275\234\350\200\205:</span><% prop.authors.each do |author| %><a href="<%= h(@keyword_url) %><%= h(author) %>" class="keyword"><%= h(author) %></a><% end %></li><% end %>
+    <% if prop.authors or prop.author %><li><span class="hatena-asin-detail-label">\344\275\234\350\200\205:</span><% authors = prop.authors || [prop.author]; authors.each do |author| %><a href="<%= h(@keyword_url) %><%= h(author) %>" class="keyword"><%= h(author) %></a><% end %></li><% end %>
     <% if prop.manufacturer %><li><span class="hatena-asin-detail-label">\345\207\272\347\211\210\347\244\276/\343\203\241\343\203\274\343\202\253\343\203\274:</span>
     <a href="<%= h(@keyword_url) %><%= h(prop.manufacturer) %>" class="keyword">
       <%= h(prop.manufacturer) %>
     </a>
     </li><% end %>
-    <% if prop.release_date %><li><span class="hatena-asin-detail-label">\347\231\272\345\243\262\346\227\245:</span><%= h(prop.release_date) %></li><% end %>
-    <li><span class="hatena-asin-detail-label">\343\203\241\343\203\207\343\202\243\343\202\242:</span><%= h(prop.media) %></li>
+    <% if prop.publication_date %><li><span class="hatena-asin-detail-label">\347\231\272\345\243\262\346\227\245:</span><%= h(prop.publication_date.gsub(/-/, '/')) %></li><% end %>
+    <li><span class="hatena-asin-detail-label">\343\203\241\343\203\207\343\202\243\343\202\242:</span><%= h(prop.binding) %></li>
   </ul>
 </div>
 <div class="hatena-asin-detail-foot"></div>
@@ -41,9 +45,9 @@ END
           super
           @asin_url = "http://d.hatena.ne.jp/asin/"
           @keyword_url = "http://d.hatena.ne.jp/keyword/"
-          @amazon_token = @option[:amazon_token] || "D3TT1SUCX72K1N"
+          @amazon_token = @option[:amazon_token] || "0VQ4VDB1VMJE2RGYE782"
           @amazon_locale = @option[:amazon_locale] || "jp"
-          @amazon_affiliate_id = @option[:amazon_affiliate_id] || "hatena-22"
+          @amazon_affiliate_id = @option[:amazon_affiliate_id] || "moonrock-22"
           @affiliate_path = @option[:amazon_affiliate_id] ? ("/" << @amazon_affiliate_id) : ""
         end
 
@@ -93,7 +97,7 @@ END
             end
           when /^detail/i
             prop = get_property(asincode) or return
-            title = prop.product_name || "#{scheme}:#{asincode}"
+            title = prop.title || "#{scheme}:#{asincode}"
             html = ERB.new(@@detail_template).result(binding)
             html = "<p>#{html}</p>" if opt[:in_paragraph]
           else
@@ -104,17 +108,20 @@ END
         private
 
         def get_property(asin)
-          ua.asin_search(asin).products[0]
+          il = ::Amazon::AWS::ItemLookup.new('ASIN', {'ItemId' => asin})
+          rg = ::Amazon::AWS::ResponseGroup.new('Large')
+          res = ua.search(il, rg)
+          res.item_sets.items[0]
         end
 
         def get_asin_title(asin)
           return if asin.nil? or asin.empty?
           prop = get_property(asin) or return
-          prop.product_name
+          prop.title
         end
 
         def ua
-          ::Amazon::Search::Request.new(@amazon_token, @amazon_affiliate_id, @amazon_locale)
+          ::Amazon::AWS::Search::Request.new(@amazon_token, @amazon_affiliate_id, @amazon_locale)
         end
       end
     end
