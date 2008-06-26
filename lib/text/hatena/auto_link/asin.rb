@@ -42,8 +42,8 @@ module Text
     <%- if attrs.publication_date -%>
     <li><span class="hatena-asin-detail-label">\347\231\272\345\243\262\346\227\245:</span><%= h(attrs.publication_date.to_s.gsub(/-/, '/')) %></li>
     <%- end -%>
-    <%- if attrs.binding -%>
-    <li><span class="hatena-asin-detail-label">\343\203\241\343\203\207\343\202\243\343\202\242:</span><%= h(attrs.binding.inspect) %></li>
+    <%- if attrs[0].instance_eval('@binding') -%>
+    <li><span class="hatena-asin-detail-label">\343\203\241\343\203\207\343\202\243\343\202\242:</span><%= h(attrs[0].instance_eval('@binding')) %></li>
     <%- end -%>
   </ul>
 </div>
