@@ -22,15 +22,29 @@ module Text
   <div class="hatena-asin-detail-info">
   <p class="hatena-asin-detail-title"><a href="<%= h(asin_url) %>"><%= h(title) %></a></p>
   <ul>
-    <% if prop.artists %><li><span class="hatena-asin-detail-label">\343\202\242\343\203\274\343\203\206\343\202\243\343\202\271\343\203\210:</span><% prop.artists.each do |artist| %><a href="<%= h(@keyword_url) %><%= h(artist) %>" class="keyword"><%= h(artist) %></a><% end %></li><% end %>
-    <% if prop.authors or prop.author %><li><span class="hatena-asin-detail-label">\344\275\234\350\200\205:</span><% authors = prop.authors || [prop.author]; authors.each do |author| %><a href="<%= h(@keyword_url) %><%= h(author) %>" class="keyword"><%= h(author) %></a><% end %></li><% end %>
-    <% if prop.manufacturer %><li><span class="hatena-asin-detail-label">\345\207\272\347\211\210\347\244\276/\343\203\241\343\203\274\343\202\253\343\203\274:</span>
-    <a href="<%= h(@keyword_url) %><%= h(prop.manufacturer) %>" class="keyword">
-      <%= h(prop.manufacturer) %>
+    <%- if attrs.artists -%>
+    <li><span class="hatena-asin-detail-label">\343\202\242\343\203\274\343\203\206\343\202\243\343\202\271\343\203\210:</span>
+      <%- attrs.artists.each do |artist| -%>
+        <a href="<%= h(@keyword_url) %><%= h(artist) %>" class="keyword"><%= h(artist) %></a>
+      <%- end -%>
+    </li>
+    <%- end -%>
+    <%- if attrs.authors or attrs.author -%>
+    <li><span class="hatena-asin-detail-label">\344\275\234\350\200\205:</span><%- (attrs.authors || [attrs.author]).each do |author| -%><a href="<%= h(@keyword_url) %><%= h(author) %>" class="keyword"><%= h(author) %></a><%- end -%></li>
+    <%- end -%>
+    <%- if attrs.manufacturer -%>
+    <li><span class="hatena-asin-detail-label">\345\207\272\347\211\210\347\244\276/\343\203\241\343\203\274\343\202\253\343\203\274:</span>
+    <a href="<%= h(@keyword_url) %><%= h(attrs.manufacturer) %>" class="keyword">
+      <%= h(attrs.manufacturer) %>
     </a>
-    </li><% end %>
-    <% if prop.publication_date %><li><span class="hatena-asin-detail-label">\347\231\272\345\243\262\346\227\245:</span><%= h(prop.publication_date.gsub(/-/, '/')) %></li><% end %>
-    <li><span class="hatena-asin-detail-label">\343\203\241\343\203\207\343\202\243\343\202\242:</span><%= h(prop.binding) %></li>
+    </li>
+    <%- end -%>
+    <%- if attrs.publication_date -%>
+    <li><span class="hatena-asin-detail-label">\347\231\272\345\243\262\346\227\245:</span><%= h(attrs.publication_date.to_s.gsub(/-/, '/')) %></li>
+    <%- end -%>
+    <%- if attrs.binding -%>
+    <li><span class="hatena-asin-detail-label">\343\203\241\343\203\207\343\202\243\343\202\242:</span><%= h(attrs.binding.inspect) %></li>
+    <%- end -%>
   </ul>
 </div>
 <div class="hatena-asin-detail-foot"></div>
@@ -86,8 +100,7 @@ END
             size = size.downcase
             size = 'medium' if size.empty?
             prop = get_property(asincode)
-            method = 'image_url_' << size
-            url = prop.__send__(method)
+            url = prop.image_sets.__send__("#{size}_image").url
             if prop and url
               title = prop.product_name || "#{scheme}:#{asincode}"
               return sprintf('<a href="%s"%s><img src="%s" alt="%s" title="%s" class="asin"></a>',
@@ -97,8 +110,9 @@ END
             end
           when /^detail/i
             prop = get_property(asincode) or return
-            title = prop.title || "#{scheme}:#{asincode}"
-            html = ERB.new(@@detail_template).result(binding)
+            attrs = prop.item_attributes
+            title = attrs.title || "#{scheme}:#{asincode}"
+            html = ERB.new(@@detail_template, nil, '-').result(binding)
             html = "<p>#{html}</p>" if opt[:in_paragraph]
           else
             return sprintf('<a href="%s"%s>%s</a>', asin_url, @a_target_string, text)
@@ -111,13 +125,13 @@ END
           il = ::Amazon::AWS::ItemLookup.new('ASIN', {'ItemId' => asin})
           rg = ::Amazon::AWS::ResponseGroup.new('Large')
           res = ua.search(il, rg)
-          res.item_sets.items[0]
+          res.item_lookup_response.items.item[0]
         end
 
         def get_asin_title(asin)
           return if asin.nil? or asin.empty?
           prop = get_property(asin) or return
-          prop.title
+          prop.item_attributes.title
         end
 
         def ua

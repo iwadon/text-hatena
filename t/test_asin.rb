@@ -22,11 +22,10 @@ asin:4798110523:detail
 <div class="section">
 	<p><p><div class="hatena-asin-detail">
   <a href="http://d.hatena.ne.jp/asin/4798110523">
-    <img src="http://ecx.images-amazon.com/images/I/01FVT6YYFTL.jpg" class="hatena-asin-detail-image" alt="「へんな会社」のつくり方 (NT2X)" title="「へんな会社」のつくり方 (NT2X)"></a>
+    <img src="http://ecx.images-amazon.com/images/I/51CEFZGYJVL._SL75_.jpg" class="hatena-asin-detail-image" alt="「へんな会社」のつくり方 (NT2X)" title="「へんな会社」のつくり方 (NT2X)"></a>
   <div class="hatena-asin-detail-info">
   <p class="hatena-asin-detail-title"><a href="http://d.hatena.ne.jp/asin/4798110523">「へんな会社」のつくり方 (NT2X)</a></p>
   <ul>
-    
     <li><span class="hatena-asin-detail-label">作者:</span><a href="http://d.hatena.ne.jp/keyword/近藤 淳也" class="keyword">近藤 淳也</a></li>
     <li><span class="hatena-asin-detail-label">出版社/メーカー:</span>
     <a href="http://d.hatena.ne.jp/keyword/翔泳社" class="keyword">
