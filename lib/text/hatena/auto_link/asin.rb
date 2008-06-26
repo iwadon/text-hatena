@@ -100,7 +100,7 @@ END
             size = size.downcase
             size = 'medium' if size.empty?
             prop = get_property(asincode)
-            url = prop.image_sets.__send__("#{size}_image").url
+            url = prop.__send__("#{size}_image").url
             if prop and url
               title = prop.product_name || "#{scheme}:#{asincode}"
               return sprintf('<a href="%s"%s><img src="%s" alt="%s" title="%s" class="asin"></a>',
