@@ -78,7 +78,7 @@ module Text
           begin
             open(url) do |f|
               content = f.read(131072) # 2^17
-              return unless /<title.*?>(.*?)<\/title>/i =~ content
+              return "#{url} (notitle)" unless /<title.*?>(.*?)<\/title>/i =~ content
               title = $1
               if h = @option[:title_handler]
                 if /charset="?(.+?)"?$/i =~ f.content_type
@@ -90,8 +90,10 @@ module Text
               end
               return title
             end
-          rescue => e
-            return e.message
+          rescue Timeout::Error
+            return "#{url} (timeout)"
+          rescue Exception => e
+            return "#{url} (#{e.message})"
           end
         end
       end
