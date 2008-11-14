@@ -5,8 +5,8 @@ module Text
   class Hatena
     class AutoLink
       class HTTP < Scheme
-        @@pattern_simple = /\[?(https?:\/\/[A-Za-z0-9~\/._\?\&=\-%#\+:\;,\@\']+)\]?/i
-        @@pattern_useful = /\[(https?:\/\/[A-Za-z0-9~\/._\?\&=\-%#\+:\;,\@\']+?):(title(?:=([^\]]*))?|barcode|detail|image(?::([hw]\d+))?)\]/i
+        @@pattern_simple = /\[?(https?:\/\/[A-Za-z0-9~\/._\?\&=\-%#\+:\;,\@\'\(\)\!]+)\]?/i
+        @@pattern_useful = /\[(https?:\/\/[A-Za-z0-9~\/._\?\&=\-%#\+:\;,\@\'\(\)\!]+?):(title(?:=([^\]]*))?|barcode|detail|image(?::([hw]\d+))?)\]/i
 
         def patterns
           [@@pattern_useful, @@pattern_simple]

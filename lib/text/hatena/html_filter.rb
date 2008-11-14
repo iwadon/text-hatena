@@ -180,7 +180,7 @@ module Text
         else
           url = "./#{url}"
         end
-        url.gsub!(/["'\(\)<>]/, "")
+        url.gsub!(/["'<>]/, "")
         return url
       end
 #=end
