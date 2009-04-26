@@ -92,3 +92,13 @@ Yukidaruma. <a href="http://f.hatena.ne.jp/jkondo/20060121153528" target="_blank
 Yukidaruma. f:id:jkondo:20060121153528j:image:w90,h67,right
 --- o
 Yukidaruma. <a href="http://f.hatena.ne.jp/jkondo/20060121153528" target="_blank"><img src="http://f.hatena.ne.jp/images/fotolife/j/jkondo/20060121/20060121153528.jpg" alt="f:id:jkondo:20060121153528j:image:w90,h67,right" title="f:id:jkondo:20060121153528j:image:w90,h67,right" class="hatena-fotolife hatena-image-right" width="90" height="67"></a>
+
+=== HatenaFotolife :movie
+--- i hatenaize_blank
+[f:id:hatenafotolife:20081030172138f:movie]
+--- o
+<object data="http://f.hatena.ne.jp/tools/flvplayer_s.swf" type="application/x-shockwave-flash" width="320" height="276">
+<param name="movie" value="http://f.hatena.ne.jp/tools/flvplayer_s.swf"></param>
+<param name="FlashVars" value="fotoid=20081030172138&user=hatenafotolife"></param>
+<param name="wmode" value="transparent"></param>
+</object>
