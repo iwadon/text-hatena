@@ -9,6 +9,7 @@ module Text
         @in_paragraph = false
         @in_anchor = false
         @in_superpre = false
+        @additional_allowtag = args[:allowtag] || {}
         @in_quote = nil
         init
       end
@@ -16,8 +17,8 @@ module Text
       def init
         @parser = HTMLSplit
 #=begin
-        @allowtag = /^(a|abbr|acronym|address|b|base|basefont|big|blockquote|br|col|em|caption|center|cite|code|div|dd|del|dfn|dl|dt|fieldset|font|form|hatena|h\d|hr|i|img|input|ins|kbd|label|legend|li|meta|ol|optgroup|option|p|pre|q|rb|rp|rt|ruby|s|samp|select|small|span|strike|strong|sub|sup|table|tbody|td|textarea|tfoot|th|thead|tr|tt|u|ul|var)$/
-        @allallowattr = /^(accesskey|align|alt|background|bgcolor|border|cite|class|color|datetime|height|id|size|title|type|valign|width)$/
+        @allowtag = Regexp.union(/^(a|abbr|acronym|address|b|base|basefont|big|blockquote|br|col|em|caption|center|cite|code|div|dd|del|dfn|dl|dt|fieldset|font|form|hatena|h\d|hr|i|img|input|ins|kbd|label|legend|li|meta|ol|optgroup|option|p|pre|q|rb|rp|rt|ruby|s|samp|select|small|span|strike|strong|sub|sup|table|tbody|td|textarea|tfoot|th|thead|tr|tt|u|ul|var)$/, /^#{@additional_allowtag.keys.join('|')}$/)
+        @allallowattr = /^(accesskey|align|alt|background|bgcolor|border|cite|class|color|datetime|height|id|size|style|title|type|valign|width)$/
         @allowattr = {
           :a => 'href|name|target',
           :base => 'href|target',
@@ -41,7 +42,7 @@ module Text
           :td => 'rowspan|colspan|nowrap',
           :th => 'rowspan|colspan|nowrap',
           :textarea => 'name|cols|rows',
-        }
+        }.merge(@additional_allowtag)
 #=end
       end
 
@@ -87,6 +88,7 @@ module Text
           @html << "<#{tagname}"
           unless attr.nil?
             attr.each do |p, v|
+              v = p if v == true
               if @allallowattr =~ p
               elsif @allowattr[tagname.intern] and /^#{@allowattr[tagname.intern]}$/i =~ p
               else

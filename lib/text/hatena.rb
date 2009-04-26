@@ -26,6 +26,7 @@ module Text
           text
         end
       end
+      @htmlfilter_option = args[:htmlfilter_option] || {}
     end
 
     def parse(text)
@@ -42,7 +43,7 @@ module Text
                             :ilevel => @ilevel })
       node.parse
 
-      parser = HTMLFilter.new({ :context => c })
+      parser = HTMLFilter.new({ :context => c }.merge(@htmlfilter_option))
       parser.parse(c.html)
       @html = parser.html
       
