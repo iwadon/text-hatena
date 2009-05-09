@@ -1,4 +1,5 @@
 require "erb"
+require 'nkf'
 require "open-uri"
 begin
   require "amazon/aws"
@@ -17,30 +18,41 @@ module Text
         @@pattern_asin = /\[?(isbn|asin):([\w\-]{10,16}):?(image|detail|title)?:?(small|large)?\]?/i
         @@detail_template = <<END
 <div class="hatena-asin-detail">
+  <%- if (prop.small_image || prop.large_image || prop.medium_image) -%>
   <a href="<%= h(asin_url || url) %>">
     <img src="<%= h((prop.small_image || prop.large_image || prop.medium_image).url) %>" class="hatena-asin-detail-image" alt="<%= h(title) %>" title="<%= h(title) %>"></a>
+  <%- else -%>
+  <a href="<%= h(asin_url || url) %>"><img src="http://d.hatena.ne.jp/images/hatena_aws.gif" class="hatena-asin-detail-image" alt="<%= h(title) %>" title="<%= h(title) %>"></a>
+  <%- end -%>
   <div class="hatena-asin-detail-info">
   <p class="hatena-asin-detail-title"><a href="<%= h(asin_url) %>"><%= h(title) %></a></p>
   <ul>
     <%- if attrs.artists -%>
     <li><span class="hatena-asin-detail-label">\343\202\242\343\203\274\343\203\206\343\202\243\343\202\271\343\203\210:</span>
       <%- attrs.artists.each do |artist| -%>
-        <a href="<%= h(@keyword_url) %><%= h(artist) %>" class="keyword"><%= h(artist) %></a>
+      <a href="<%= h(@keyword_url) %><%= URI.escape(NKF.nkf('-We', artist)).downcase %>" class="keyword"><%= h(artist) %></a>
       <%- end -%>
     </li>
     <%- end -%>
     <%- if attrs.authors or attrs.author -%>
-    <li><span class="hatena-asin-detail-label">\344\275\234\350\200\205:</span><%- (attrs.authors || [attrs.author]).each do |author| -%><a href="<%= h(@keyword_url) %><%= h(author) %>" class="keyword"><%= h(author) %></a><%- end -%></li>
+    <li><span class="hatena-asin-detail-label">\344\275\234\350\200\205:</span>
+      <%- (attrs.authors || [attrs.author]).each do |author| -%>
+      <a href="<%= h(@keyword_url) %><%= URI.escape(NKF.nkf('-We', author)).downcase %>" class="keyword"><%= h(author) %></a>
+      <%- end -%>
+    </li>
     <%- end -%>
     <%- if attrs.manufacturer -%>
     <li><span class="hatena-asin-detail-label">\345\207\272\347\211\210\347\244\276/\343\203\241\343\203\274\343\202\253\343\203\274:</span>
-    <a href="<%= h(@keyword_url) %><%= h(attrs.manufacturer) %>" class="keyword">
-      <%= h(attrs.manufacturer) %>
-    </a>
+    <%- attrs.manufacturer.each do |manufacturer| -%>
+      <a href="<%= h(@keyword_url) %><%= URI.escape(NKF.nkf('-We', manufacturer)).downcase %>" class="keyword"><%= h(manufacturer) %></a>
+    <%- end -%>
     </li>
     <%- end -%>
     <%- if attrs.publication_date -%>
     <li><span class="hatena-asin-detail-label">\347\231\272\345\243\262\346\227\245:</span><%= h(attrs.publication_date.to_s.gsub(/-/, '/')) %></li>
+    <%- end -%>
+    <%- if attrs.release_date -%>
+    <li><span class="hatena-asin-detail-label">\347\231\272\345\243\262\346\227\245:</span><%= h(attrs.release_date.to_s.gsub(/-/, '/')) %></li>
     <%- end -%>
     <%- if attrs[0].instance_eval('@binding') -%>
     <li><span class="hatena-asin-detail-label">\343\203\241\343\203\207\343\202\243\343\202\242:</span><%= h(attrs[0].instance_eval('@binding')) %></li>
