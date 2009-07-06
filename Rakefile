@@ -27,26 +27,18 @@ begin
 rescue LoadError
 end
 
-PKG_NAME = 'text-hatena'
-PKG_VERS = '0.12.20080627.0'
-spec = Gem::Specification.new do |s|
-  s.name = PKG_NAME
-  s.version = PKG_VERS
-  s.summary = "A Ruby library for Hatena notation"
-  s.require_path = 'lib'
-  s.files = Dir.glob('{lib,t}/**/*') + %w(README README.en README.rdoc Rakefile)
-  s.has_rdoc = true
-  s.author = 'Hiroyuki Iwatsuki'
-  s.email = 'don@na.rim.or.jp'
-  s.homepage = 'http://moonrock.jp/~don/ruby/text-hatena/'
-end
+spec = Gem::Specification.load("text-hatena.gemspec")
 Rake::GemPackageTask.new(spec) do |t|
   t.need_tar = true
   t.gem_spec = spec
 end
+
+desc "Install #{spec.name}-#{spec.version}"
 task :install => :package do
-  sh %(sudo gem install pkg/#{PKG_NAME}-#{PKG_VERS})
+  sh %(sudo gem install pkg/#{spec.name}-#{spec.version})
 end
+
+desc "Uninstall #{spec.name}"
 task :uninstall do
-  sh %(sudo gem uninstall #{PKG_NAME})
+  sh %(sudo gem uninstall #{spec.name})
 end
