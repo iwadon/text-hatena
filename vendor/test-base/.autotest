@@ -1,0 +1,73 @@
+class Autotest
+  alias __tests_for_file tests_for_file
+  def tests_for_file(filename)
+    case filename
+    when /^lib\/.*\.rb$/ then
+      impl = File.basename(filename).gsub '_', '_?'
+      @files.keys.select do |k|
+        k =~ %r%^test/.*#{impl}$%
+      end
+    when /^test\/.*_test\.rb$/ then
+      [filename]
+    else
+      @output.puts "Dunno! #{filename}" if $TESTING
+      []
+    end
+  end
+end
+
+module Autotest::Screen
+  STATUS = %q[%H %`%-w%{=b bw}%n %t%{-}%+w]
+
+  SCREEN_CMD = 'screen'
+  SCREEN_COLOR = {
+    :black => 'dd',
+    :green => 'gk',
+    :red   => 'rw',
+  }
+
+  def self.message(msg, color = :black)
+    col = SCREEN_COLOR[color]
+    msg = %Q[ %{=b #{col}} #{msg} %{-}]
+    send_cmd(msg)
+  end
+
+  def self.clear
+    send_cmd('')
+  end
+
+  def self.run_screen_session?
+    str = `#{SCREEN_CMD} -ls`
+    str.match(/(\d+) Socket/) && ($1.to_i > 0)
+  end
+
+  def self.execute?
+    !($TESTING || !run_screen_session?)
+  end
+
+  def self.send_cmd(msg)
+    cmd = %Q[#{SCREEN_CMD} -X eval 'hardstatus alwayslastline "#{(STATUS + msg).gsub('"', '\"')}"']
+    system cmd
+  end
+
+  Autotest.add_hook :run do  |at|
+    message 'Run Tests' if execute?
+  end
+
+  Autotest.add_hook :quit do |at|
+    clear if execute?
+  end
+
+  Autotest.add_hook :ran_command do |at|
+    if execute?
+      at.results.sub(/(\d+) failures, (\d+) errors/) do |m|
+        if $1 == '0' && $2 == '0'
+          message "All Green", :green
+        else
+          message "Red F:#{$1} E:#{$2}", :red
+        end
+      end
+    end
+  end
+end
+

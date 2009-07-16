@@ -1,0 +1,24 @@
+===
+--- input
+'foo'
+--- output
+foo
+
+===
+--- input
+'fooo'
+--- output
+fooo
+
+===
+--- input double
+'fooo'
+--- output
+fooofooo
+
+===
+--- input double double
+'ooo'
+--- output triple double
+oo
+
