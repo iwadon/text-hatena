@@ -18,11 +18,11 @@ module Text
           break unless @pattern =~ l
           l = c.shiftline
           c.htmllines("#{t}\t<tr>")
-          l.scan(/([^\|]+)\|/) do |$_, *|
-            if sub!(/^\*/, "")
-              c.htmllines("#{t}\t\t<th>#{$_}</th>")
+          l.scan(/([^\|]+)\|/) do |_, *|
+            if _.sub!(/^\*/, "")
+              c.htmllines("#{t}\t\t<th>#{_}</th>")
             else
-              c.htmllines("#{t}\t\t<td>#{$_}</td>")
+              c.htmllines("#{t}\t\t<td>#{_}</td>")
             end
           end
           c.htmllines("#{t}\t</tr>")
