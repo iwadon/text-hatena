@@ -10,7 +10,7 @@ module Text
       @html = ""
       @baseuri = args[:baseuri] || ""
       @permalink = args[:permalink] || ""
-      @ilevel = Integer(args[:ilevel]) || 0 # level of default indent
+      @ilevel = Integer(args[:ilevel]) rescue 0 # level of default indent
       @invalidnode = args[:invalidnode] || []
       @sectionanchor = args[:sectionanchor] || "o-"
       @autolink_option = args[:autolink_option] || {}
