@@ -27,6 +27,7 @@ module Text
         end
       end
       @htmlfilter_option = args[:htmlfilter_option] || {}
+      @hrank = args[:hrank] || 3
     end
 
     def parse(text)
@@ -37,7 +38,8 @@ module Text
                                :invalidnode => @invalidnode,
                                :sectionanchor => @sectionanchor,
                                :autolink_option => @autolink_option,
-                               :texthandler => @texthandler })
+                               :texthandler => @texthandler,
+                               :hrank => @hrank })
       c = @context
       node = BodyNode.new({ :context => c,
                             :ilevel => @ilevel })

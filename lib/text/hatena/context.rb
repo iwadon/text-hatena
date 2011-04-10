@@ -11,6 +11,7 @@ module Text
         @sectionanchor = args[:sectionanchor]
         @autolink_option = args[:autolink_option]
         @texthandler = args[:texthandler]
+        @hrank = args[:hrank]
         @htmllines = []
         @html = ""
         @footnotes = []
@@ -107,6 +108,10 @@ module Text
 
       def texthandler
         @texthandler
+      end
+
+      def hrank
+        @hrank
       end
     end
   end

@@ -4,6 +4,7 @@ module Text
       def initialize(args = {})
         @context = args[:context]
         @ilevel = args[:ilevel]
+        @hlevel = args[:hlevel]
         @html = ""
         init
       end
