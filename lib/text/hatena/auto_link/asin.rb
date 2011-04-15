@@ -5,6 +5,9 @@ begin
   require "amazon/aws"
   require "amazon/aws/search"
 rescue LoadError
+  require "rubygems"
+  require "amazon/aws"
+  require "amazon/aws/search"
 end
 require "text/hatena/auto_link/scheme"
 
