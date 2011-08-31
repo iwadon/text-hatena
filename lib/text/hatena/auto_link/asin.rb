@@ -5,6 +5,9 @@ begin
   require "amazon/aws"
   require "amazon/aws/search"
 rescue LoadError
+  require "rubygems"
+  require "amazon/aws"
+  require "amazon/aws/search"
 end
 require "text/hatena/auto_link/scheme"
 
@@ -135,8 +138,7 @@ END
 
         def get_property(asin)
           il = ::Amazon::AWS::ItemLookup.new('ASIN', {'ItemId' => asin})
-          rg = ::Amazon::AWS::ResponseGroup.new('Large')
-          res = ua.search(il, rg)
+          res = ua.search(il)
           res.item_lookup_response.items.item[0]
         end
 

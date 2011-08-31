@@ -12,7 +12,7 @@ module Text
         return nil unless l = c.shiftline
         return nil unless @pattern =~ l
         t = "\t" * @ilevel
-        c.htmllines("#{t}<h4>#{$1}</h4>")
+        c.htmllines("#{t}<h#{@context.hrank + 1}>#{$1}</h#{@context.hrank + 1}>")
       end
     end
   end
