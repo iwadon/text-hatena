@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem 'nokogiri'
 gem 'rake'
-gem 'ruby-aaws'
+#gem 'ruby-aaws'
 
 if RUBY_VERSION < '1.9.0'
   gem 'rdoc'

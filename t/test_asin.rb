@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require "t/test_helper"
 require "text/hatena"
 
@@ -21,8 +22,7 @@ asin:4798110523:detail
 --- output
 <div class="section">
 	<p><p><div class="hatena-asin-detail">
-  <a href="http://d.hatena.ne.jp/asin/4798110523">
-    <img src="http://ecx.images-amazon.com/images/I/51CEFZGYJVL._SL75_.jpg" class="hatena-asin-detail-image" alt="「へんな会社」のつくり方 (NT2X)" title="「へんな会社」のつくり方 (NT2X)"></a>
+  <a href="http://d.hatena.ne.jp/asin/4798110523"><img src="http://ecx.images-amazon.com/images/I/51CEFZGYJVL._SL75_.jpg" class="hatena-asin-detail-image" alt="「へんな会社」のつくり方 (NT2X)" title="「へんな会社」のつくり方 (NT2X)"></a>
   <div class="hatena-asin-detail-info">
   <p class="hatena-asin-detail-title"><a href="http://d.hatena.ne.jp/asin/4798110523">「へんな会社」のつくり方 (NT2X)</a></p>
   <ul>
@@ -47,7 +47,7 @@ asin:B00260G73Q:detail
 --- output
 <div class="section">
 	<p><p><div class="hatena-asin-detail">
-  <a href="http://d.hatena.ne.jp/asin/B00260G73Q"><img src="http://d.hatena.ne.jp/images/hatena_aws.gif" class="hatena-asin-detail-image" alt="たのしいカトリーヌ" title="たのしいカトリーヌ"></a>
+  <a href="http://d.hatena.ne.jp/asin/B00260G73Q"><img src="http://ecx.images-amazon.com/images/I/41fqkm7vpxL._SL75_.jpg" class="hatena-asin-detail-image" alt="たのしいカトリーヌ" title="たのしいカトリーヌ"></a>
   <div class="hatena-asin-detail-info">
   <p class="hatena-asin-detail-title"><a href="http://d.hatena.ne.jp/asin/B00260G73Q">たのしいカトリーヌ</a></p>
   <ul>

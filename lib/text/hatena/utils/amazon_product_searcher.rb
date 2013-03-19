@@ -27,51 +27,71 @@ module Text
         end
 
         def artist
-          artists[0]
+          @artist ||= get_text('Artist')
         end
 
         def artists
-          @doc.css('Artist').map do |e| e.text end
+          @artists ||= get_text_array('Artist')
         end
 
         def author
-          @doc.css('Author').text
+          @author ||= get_text('Author')
         end
 
         def authors
-          @doc.css('Author').map do |e| e.text end
+          @authors ||= get_text_array('Author')
         end
-
+          
         def binding
-          @binding ||= @doc.css('Binding').text
+          @binding ||= get_text('Binding')
         end
 
         def manufacturer
-          @doc.css('Manufacturer').text
+          @manufacturer ||= get_text('Manufacturer')
         end
 
         def large_image
-          Image.new(@doc.css('LargeImage')[0])
+          @large_image ||= Image.new(@doc.css('LargeImage')[0])
         end
 
         def medium_image
-          Image.new(@doc.css('MediumImage')[0])
+          @medium_image ||= Image.new(@doc.css('MediumImage')[0])
         end
 
         def publication_date
-          @publication_date ||= @doc.css('PublicationDate').text
+          @publication_date ||= get_text('PublicationDate')
         end
 
         def release_date
-          @release_date ||= @doc.css('ReleaseDate').text
+          @release_date ||= get_text('ReleaseDate')
         end
 
         def small_image
-          Image.new(@doc.css('SmallImage')[0])
+          @small_image ||= Image.new(@doc.css('SmallImage')[0])
         end
 
         def title
-          @title ||= @doc.css('ItemAttributes Title').text
+          @title ||= get_text('ItemAttributes Title')
+        end
+
+        def get_text(key)
+          e = @doc.css(key)
+          if e.empty?
+            nil
+          else
+            e.text
+          end
+        end
+
+        def get_text_array(key)
+          e = @doc.css(key)
+          if e.empty?
+            nil
+          else
+            e.map do |i|
+              i.text
+            end
+          end
         end
       end
 
