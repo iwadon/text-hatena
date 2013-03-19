@@ -15,7 +15,7 @@ Rake::RDocTask.new do |t|
 end
   
 Rake::TestTask.new do |t|
-  t.pattern = "t/test*.rb"
+  t.test_files = FileList["t/test*.rb"]
   t.libs << "."
 end
 
