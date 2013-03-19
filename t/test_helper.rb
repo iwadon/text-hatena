@@ -1,3 +1,5 @@
+require 'test/unit'
+Test::Unit::Error = Class.new(StandardError)
 $:.unshift(File.dirname(__FILE__) + "/../vendor/test-base/lib")
 require "test/base"
 #module Test

@@ -1,8 +1,8 @@
 # -*- Ruby -*-
 
 require 'rake/clean'
-require 'rake/gempackagetask'
-require 'rake/rdoctask'
+require 'rubygems/package_task'
+require 'rdoc/task'
 require "rake/testtask"
 
 task :default => :test
@@ -16,6 +16,7 @@ end
   
 Rake::TestTask.new do |t|
   t.pattern = "t/test*.rb"
+  t.libs << "."
 end
 
 begin
@@ -38,7 +39,7 @@ spec = Gem::Specification.new do |s|
   s.email = 'don@na.rim.or.jp'
   s.homepage = 'http://moonrock.jp/~don/ruby/text-hatena/'
 end
-Rake::GemPackageTask.new(spec) do |t|
+Gem::PackageTask.new(spec) do |t|
   t.need_tar = true
   t.gem_spec = spec
 end
